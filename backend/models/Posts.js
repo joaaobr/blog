@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 mongoose.connect("mongodb://localhost/blog")
 
-const UserSchema = new mongoose.Schema({
+const PostsSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -13,13 +13,16 @@ const UserSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    password: {
-        type: String,
-        minlength: 7,
+    post: {
+        type: Text,
+        required: true
+    },
+    id: {
+        type: mongoose.Types.ObjectId,
         required: true
     }
 })
 
-const User = mongoose.model("users", UserSchema)
+const Posts = mongoose.model("posts", PostsSchema)
 
-module.exports = User
+module.exports = Posts
