@@ -32,7 +32,8 @@ module.exports = {
     },
 
     async delete (req, res) {
-        const { id, password } = req.body
+        const { id } = req.params
+        const { password } = req.body
 
         try {
 
@@ -46,7 +47,30 @@ module.exports = {
 
         const UserToBeRemoved = await User.findByIdAndRemove(id)
 
-        return res.status(200).json({ message: user })
+        return res.status(200).json({ message: UserToBeRemoved })
+
+        } catch(err) {
+            return res.status(500).json(err)
+        }
+    },
+
+    async update (req, res) {
+        const { id } = req.params
+        const { password } = req.body
+
+        try {
+
+        const user = await User.findById(id)
+
+        if(!user) return res.status(404).json({ message: "Id is not valid!" })
+
+        const comparePasswors = bcrypt.compare(password, user.password)
+
+        if(!comparePasswors) return res.status(404).json({ message: "the passwords do not match!" })
+
+        const UserToBeUpdate = await User.findByIdAndUpdate(id, req.body, { now: true })
+
+        return res.status(200).json({ message: UserToBeUpdate })
 
         } catch(err) {
             return res.status(500).json(err)
