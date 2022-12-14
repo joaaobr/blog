@@ -54,6 +54,24 @@ module.exports = {
 
     },
 
+
+    async delete(req, res) {
+        const { id } = req.params
+
+        try {
+            const verifyId = await Comment.findById(id)
+
+            if(!verifyId) return res.status(404).json({ message: "Id is not valid!" })
+
+            const comment = await Comment.findByIdAndDelete(id)
+
+            return res.status(200).json({ message: comment })
+
+        } catch(err) {
+            return res.status(500).json(err)
+        }
+    },
+
     async comments (req, res) {
         try {
             const comments = await Comment.find()

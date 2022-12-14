@@ -19,7 +19,10 @@ module.exports = (app) => {
 
     app.post('/comment/create', CommentController.create)
 
-    app.post('/comment/', CommentController.comments)
+    app.post('/comment/delete/:id', CommentController.delete)
 
     app.post('/comment/find/', CommentController.find)
+
+    app.post('/comment/', CommentController.comments)
+
 }

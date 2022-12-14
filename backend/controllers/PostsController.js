@@ -51,13 +51,13 @@ module.exports = {
         const { id } = req.params
 
         try {
-            const post = await Post.findById(id)
+            const verifyId = await Post.findById(id)
 
-            if(!post) return res.status(404).json({ message: "Id is not valid!" })
+            if(!verifyId) return res.status(404).json({ message: "Id is not valid!" })
 
-            const PostToBeUpdate = await Post.findByIdAndDelete(id)
+            const post = await Post.findByIdAndDelete(id)
 
-            return res.status(200).json({ message: PostToBeUpdate })
+            return res.status(200).json({ message: post })
 
         } catch(err) {
             return res.status(500).json(err)
