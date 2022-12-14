@@ -29,5 +29,36 @@ module.exports = {
         } catch(err) {
             return res.status(500).json(err)
         }
+    },
+
+    async find(req, res) {
+        const { id } = req.body
+
+        if(!id) return res.status(404).json({ message: "id is not valid!" })
+
+        try {
+            const verifyPostId = await Post.findById(id)
+
+            if(verifyPostId) return res.status(404).json({ message: "id is not valid!" })
+
+            const comments = await Comment.find({ _id: id })
+
+            return res.status(200).json({ message: comments })
+        } catch(err) {
+            return res.status(500).json(err)
+        }
+
+    },
+
+    async comments (req, res) {
+        try {
+            const comments = await Comment.find()
+
+            return res.status(200).json({ message: comments })
+        } catch(err) {
+            return res.status(500).json({ error: err.message })
+        }
     }
+
+
 }

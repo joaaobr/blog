@@ -18,4 +18,8 @@ module.exports = (app) => {
     app.post('/post', PostController.posts)
 
     app.post('/comment/create', CommentController.create)
+
+    app.post('/comment/', CommentController.comments)
+
+    app.post('/comment/find/', CommentController.find)
 }
