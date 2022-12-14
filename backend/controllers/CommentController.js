@@ -3,7 +3,7 @@ const Post = require('../models/Posts')
 const User = require('../models/User')
 
 module.exports = {
-    async create (req, res) {
+    async create(req, res) {
         const { name, email, post_id, message } = req.body
 
         if(!name) return res.status(404).json({ message: "name is not valid!" })
@@ -72,7 +72,24 @@ module.exports = {
         }
     },
 
-    async comments (req, res) {
+    async update(req, res) {
+        const { id } = req.params
+
+        try {
+            const verifyid = await Comment.findById(id)
+
+            if(!verifyid) return res.status(404).json({ message: "Id is not valid!" })
+
+            const comment = await Comment.findByIdAndUpdate(id, req.body, { now: true })
+
+            return res.status(200).json({ message: comment })
+
+        } catch(err) {
+            return res.status(500).json(err)
+        }
+    },
+
+    async comments(req, res) {
         try {
             const comments = await Comment.find()
 
