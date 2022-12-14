@@ -8,9 +8,12 @@ const CommentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    user_id: {
-        type: mongoose.Types.ObjectId,
-        unique: true,
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
         required: true
     },
     post_id: {

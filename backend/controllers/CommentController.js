@@ -4,23 +4,27 @@ const User = require('../models/User')
 
 module.exports = {
     async create (req, res) {
-        const { user_id, post_id, message } = req.body
+        const { name, email, post_id, message } = req.body
 
-        if(!user_id) return res.status(404).json({ message: "user_id is not valid!" })
+        if(!name) return res.status(404).json({ message: "name is not valid!" })
+        if(!email) return res.status(404).json({ message: "email is not valid!" })
         if(!post_id) return res.status(404).json({ message: "post_id is not valid!" })
         if(!message) return res.status(404).json({ message: "message is not valid!" })
 
         try {
-            const verifyUserId = await User.findById(user_id)
+            const verifyEmailUser = await User.findOne({ email })
 
-            if(!verifyUserId) return res.status(404).json({ message: "user_id is not valid!" })
+            if(!verifyEmailUser) return res.status(404).json({ message: "email is not valid!" })
+
+            if(verifyEmailUser.name !== name) return res.status(404).json({ message: "name is not valid!" })
 
             const verifyPostId = await Post.findById(post_id)
 
             if(!verifyPostId) return res.status(404).json({ message: "post_id is not valid!" })
 
             const comment = await Comment.create({
-                user_id: verifyUserId._id,
+                name, 
+                email,
                 post_id: verifyPostId._id,
                 message
             })
@@ -41,7 +45,7 @@ module.exports = {
 
             if(verifyPostId) return res.status(404).json({ message: "id is not valid!" })
 
-            const comments = await Comment.find({ _id: id })
+            const comments = await Comment.find({ post_id: id })
 
             return res.status(200).json({ message: comments })
         } catch(err) {
