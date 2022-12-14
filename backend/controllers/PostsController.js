@@ -47,6 +47,23 @@ module.exports = {
         }
     },
 
+    async delete(req, res) {
+        const { id } = req.params
+
+        try {
+            const post = await Post.findById(id)
+
+            if(!post) return res.status(404).json({ message: "Id is not valid!" })
+
+            const PostToBeUpdate = await Post.findByIdAndDelete(id)
+
+            return res.status(200).json({ message: PostToBeUpdate })
+
+        } catch(err) {
+            return res.status(500).json(err)
+        }
+    },
+
     async posts(req, res) {
         try {
             const posts = await Post.find()

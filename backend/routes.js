@@ -12,5 +12,7 @@ module.exports = (app) => {
     
     app.post('/post/update/:id', PostController.update)
 
+    app.post('/post/delete/:id', PostController.delete)
+
     app.post('/post', PostController.posts)
 }
