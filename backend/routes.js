@@ -10,5 +10,5 @@ module.exports = (app) => {
 
     app.post('/post/create', PostController.create)
 
-    app.post('/post/', PostController.create)
+    app.post('/post', PostController.posts)
 }
