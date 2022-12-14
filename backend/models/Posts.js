@@ -13,16 +13,16 @@ const PostsSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    post: {
-        type: Text,
+    message: {
+        type: String,
         required: true
     },
-    id: {
-        type: mongoose.Types.ObjectId,
+    title: {
+        type: String,
         required: true
     }
 })
 
-const Posts = mongoose.model("posts", PostsSchema)
+const Post = mongoose.model("posts", PostsSchema)
 
-module.exports = Posts
+module.exports = Post
