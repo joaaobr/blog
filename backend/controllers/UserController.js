@@ -37,17 +37,17 @@ module.exports = {
 
         try {
 
-        const user = await User.findById(id)
+            const user = await User.findById(id)
 
-        if(!user) return res.status(404).json({ message: "Id is not valid!" })
+            if(!user) return res.status(404).json({ message: "Id is not valid!" })
 
-        const comparePasswors = bcrypt.compare(password, user.password)
+            const comparePasswors = bcrypt.compare(password, user.password)
 
-        if(!comparePasswors) return res.status(404).json({ message: "the passwords do not match!" })
+            if(!comparePasswors) return res.status(404).json({ message: "the passwords do not match!" })
 
-        const UserToBeRemoved = await User.findByIdAndRemove(id)
+            const UserToBeRemoved = await User.findByIdAndRemove(id)
 
-        return res.status(200).json({ message: UserToBeRemoved })
+            return res.status(200).json({ message: UserToBeRemoved })
 
         } catch(err) {
             return res.status(500).json(err)
@@ -60,17 +60,17 @@ module.exports = {
 
         try {
 
-        const user = await User.findById(id)
+            const user = await User.findById(id)
 
-        if(!user) return res.status(404).json({ message: "Id is not valid!" })
+            if(!user) return res.status(404).json({ message: "Id is not valid!" })
 
-        const comparePasswors = bcrypt.compare(password, user.password)
+            const comparePasswors = bcrypt.compare(password, user.password)
 
-        if(!comparePasswors) return res.status(404).json({ message: "the passwords do not match!" })
+            if(!comparePasswors) return res.status(404).json({ message: "the passwords do not match!" })
 
-        const UserToBeUpdate = await User.findByIdAndUpdate(id, req.body, { now: true })
+            const UserToBeUpdate = await User.findByIdAndUpdate(id, req.body, { now: true })
 
-        return res.status(200).json({ message: UserToBeUpdate })
+            return res.status(200).json({ message: UserToBeUpdate })
 
         } catch(err) {
             return res.status(500).json(err)

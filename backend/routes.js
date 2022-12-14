@@ -1,5 +1,6 @@
 const UserController = require('./controllers/UserController')
 const PostController = require('./controllers/PostsController')
+const CommentController = require('./controllers/CommentController')
 
 module.exports = (app) => {
     app.post('/user/create', UserController.create)
@@ -15,4 +16,6 @@ module.exports = (app) => {
     app.post('/post/delete/:id', PostController.delete)
 
     app.post('/post', PostController.posts)
+
+    app.post('/comment/create', CommentController.create)
 }
