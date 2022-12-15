@@ -1,6 +1,7 @@
 const UserController = require('./controllers/UserController')
 const PostController = require('./controllers/PostsController')
 const CommentController = require('./controllers/CommentController')
+const AuthController = require('./controllers/AuthController')
 
 module.exports = (app) => {
     app.post('/user/create', UserController.create)
@@ -27,4 +28,7 @@ module.exports = (app) => {
 
     app.post('/comment/', CommentController.comments)
 
+    app.post('/auth/', AuthController.authenticate)
+
+    app.post('/auth/validate', AuthController.validate)
 }
