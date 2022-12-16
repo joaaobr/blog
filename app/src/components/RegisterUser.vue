@@ -36,31 +36,15 @@ export default {
         password: this.password,
       }
 
-      const myHeaders = {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "POST"
-      }
-
-      const options = {
-        method: "POST",
-        mode: 'cors',
-        cache: 'default',
-        body: JSON.stringify(data),
-        headers: myHeaders
-    }
-
-      const v = await axios.post("http://localhost:3000/user/create",data)
+      await axios.post("http://localhost:3000/user/create", data)
       .then(data => {
-        console.log(data)
+        if(data.data.message) alert("Account created successfully")
       })
       .catch(err => {
-        console.log(err)
         if(err.response.status == 404) {
           window.alert(err.response.data.message)
         } else {
-          if(err) window.alert("There was an error") 
+          if(err) alert("There was an error") 
         }
         })
       
