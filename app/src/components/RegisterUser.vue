@@ -56,4 +56,4 @@ export default {
 }
 </script>
 
-<style>@import "../assets/css/register.css"</style>
+<style src="../assets/css/register.css" scoped></style>
