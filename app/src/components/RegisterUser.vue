@@ -2,6 +2,7 @@
   <body>
     <div>
         <h1>Register</h1>
+        
         <input type="text" placeholder="Name" v-model="name">
         <br><br>
 
@@ -18,6 +19,7 @@
 
 <script>
 import axios from 'axios'
+
 export default {
   name: 'Auth',
   data() {

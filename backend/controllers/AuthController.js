@@ -43,7 +43,7 @@ module.exports = {
                 if(data) return res.status(200).json({ message: "ok" }) 
             });
         } catch (err) {
-            res.status(400).json({ err });
+            return res.status(500).json({ err });
         }
     }
 }
