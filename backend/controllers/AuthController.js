@@ -36,11 +36,15 @@ module.exports = {
         if (!token) return res.status(401).json({ message: "token is not valid!" });
 
         try {
-            jwt.verify(token, SECRET, (err, data) => {
+            jwt.verify(token, SECRET, async (err, data) => {
                 console.log(err, data)
                 if(err) return res.status(404).json({ message: "token is not valid!" })
 
-                if(data) return res.status(200).json({ message: "ok" }) 
+                const verifyId = await User.findById(data.id)
+
+                if(!verifyId) return res.status(404).json({ message: "token is not valid!" }) 
+
+                if(verifyId) return res.status(200).json({ message: "ok" }) 
             });
         } catch (err) {
             return res.status(500).json({ err });

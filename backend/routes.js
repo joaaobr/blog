@@ -9,6 +9,7 @@ module.exports = (app) => {
     app.post('/user/delete/:id', UserController.delete)
 
     app.post('/user/update/:id', UserController.update)
+    app.post('/user/getUserByEmail', UserController.getUserByEmail)
 
     app.post('/post/create', PostController.create)
     

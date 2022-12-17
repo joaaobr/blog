@@ -1,5 +1,8 @@
+require('dotenv').config()
 const User = require('../models/User')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const { SECRET } = process.env
 
 module.exports = {
     async create (req, res) {
@@ -74,5 +77,23 @@ module.exports = {
         } catch(err) {
             return res.status(500).json(err)
         }
-    }
+    },
+
+   async getUserByEmail(req, res) {
+    const { token } = req.body
+
+    jwt.verify(token, SECRET, async (err, data) => {
+        if(err) return res.status(404).json({ message: "token is not valid!" })
+
+        const id = data.id
+        const checkIdExists = await User.findById(id)
+        console.log(checkIdExists)
+        if(!checkIdExists) return res.status(404).json({ message: "id is not valid!" })
+
+        return res.status(200).json({ message: checkIdExists.email })
+    })
+
+
+
+   }
 }
