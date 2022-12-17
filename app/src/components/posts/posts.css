@@ -5,8 +5,8 @@ body {
 
 div {
     position: absolute;
-    top: 10%;
-    left: 20%;
+    top: 12%;
+    left: 26%;
     transform: translate(-50%,-50%);
     /* padding: 100%; */
     /* background-color: rgb(235, 240, 235); */
@@ -38,7 +38,7 @@ button:hover {
 a {
     text-decoration: none;
     color: rgb(40, 35, 35);
-    font-size: 18px;
+    font-size: 20px;
     font-family: 'Courier New', Courier, monospace;
 }
 
