@@ -12,18 +12,27 @@ module.exports = {
         try {
             
             const checkEmail = await User.findOne({ email })
-    
+            
             if(!checkEmail) return res.status(404).json({ message: "email is not valid!" })
-
-            const post = await Post.create({
+            
+            console.log({
                 name: checkEmail.name,
-                email,
                 title,
                 message
             })
+
+            const post = await Post.create({
+                name: checkEmail.name,
+                title,
+                message
+            })
+            
+            console.log(post)
             return res.status(201).json({ message: post })
 
         } catch(err) {
+            console.log(err)
+
             return res.status(500).json({ message: err })
         }
     },
@@ -71,6 +80,20 @@ module.exports = {
             return res.status(200).json({ message: posts })
         } catch(err) {
             return res.status(500).json({ error: err.message })
+        }
+    },
+
+    async getPost(req, res) {
+        const { name, title } = req.body
+        
+        try {
+            const checkPost = await Post.find({ name, title })
+    
+            if(!checkPost) return res.status(404).json({ message: "Post not exists!" })
+            
+            return res.status(200).json({ message: checkPost })
+        } catch(err) {
+            return res.status(500).json({ err })
         }
     }
 }
