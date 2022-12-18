@@ -13,10 +13,6 @@ const CommentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    email: {
-        type: String,
-        required: true
-    },
     post_id: {
         type: mongoose.Types.ObjectId,
         unique: true,
