@@ -14,12 +14,6 @@ module.exports = {
             const checkEmail = await User.findOne({ email })
             
             if(!checkEmail) return res.status(404).json({ message: "email is not valid!" })
-            
-            console.log({
-                name: checkEmail.name,
-                title,
-                message
-            })
 
             const post = await Post.create({
                 name: checkEmail.name,
@@ -27,12 +21,9 @@ module.exports = {
                 message
             })
             
-            console.log(post)
             return res.status(201).json({ message: post })
 
         } catch(err) {
-            console.log(err)
-
             return res.status(500).json({ message: err })
         }
     },

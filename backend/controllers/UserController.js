@@ -87,7 +87,7 @@ module.exports = {
 
         const id = data.id
         const checkIdExists = await User.findById(id)
-        console.log(checkIdExists)
+
         if(!checkIdExists) return res.status(404).json({ message: "id is not valid!" })
 
         return res.status(200).json({ message: checkIdExists.email })
