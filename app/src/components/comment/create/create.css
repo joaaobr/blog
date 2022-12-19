@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: 83vh;
+}
+
+input {
+    padding: 16px;
+    width: 69vh;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    border: 1px solid rgb(226, 219, 219);
+    border-radius: 2px;
+}
+
+button {
+    background-color: dodgerblue;
+    border: none;
+    padding: 15px;
+    width: 85%;
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+button:hover {
+    background-color: deepskyblue;
+    cursor: pointer;
+    transition: 1.1s;
+}
+
+textarea {      
+    border: 1px solid rgb(226, 219, 219);
+    width: 68vh;
+    height: 62vh;
+    font-size: 14px;
+    resize: none;
+    display: flex;
+    padding: 17px 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+textarea:focus {      
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}

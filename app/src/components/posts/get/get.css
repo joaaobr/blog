@@ -1,0 +1,71 @@
+body {
+    font-family: 'Courier New', Courier, monospace;  
+}
+
+div {
+    position: absolute;
+    top: 13%;
+    left: 26%;
+    transform: translate(-50%,-50%);
+    height: 5vh;
+}
+
+
+#name {
+    padding: 1px;
+    width: 105%;
+    background-color: rgb(180, 230, 255);
+    border: none;
+    text-align: center;
+    align-items: center;
+    border-radius: 4px;
+    color: rgb(55, 60, 210);
+    font-size: 15px;
+}
+
+#title {
+    font-size: 35px;
+    letter-spacing: 1px;
+}   
+
+a {
+    padding: 6px;
+    width: 135%;
+    border: 1px solid rgb(225, 225, 225);
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 15px;
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    background-color: rgb(240, 240, 245);
+    transition: 0.5;
+}
+
+textarea {  
+    position: absolute;    
+    border: 1px solid rgb(226, 219, 219);
+    width: 20vh;
+    height: 20vh;
+    font-size: 14px;
+    resize: none;
+    display: flex;
+    padding: 17px 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+textarea:focus {      
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
+
+li {
+    list-style: none;
+}
+
+#comment {
+    margin-top: 10%;
+}

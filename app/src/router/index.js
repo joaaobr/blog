@@ -3,6 +3,8 @@ import HomeView from '../views/Home.vue'
 import Register from '../views/Register.vue'
 import Auth from '../views/Auth.vue'
 import CreatePost from '../views/CreatePost.vue'
+import Post from '../views/Post.vue'
+import CreateComment from '../views/CreateComment.vue'
 
 const routes = [
   {
@@ -24,6 +26,16 @@ const routes = [
     path: '/post/create',
     name: 'createPost',
     component: CreatePost
+  },
+  {
+    path: '/post/:name/:title',
+    name: 'post',
+    component: Post
+  },
+  {
+    path: '/comment/:name/:title',
+    name: 'comment',
+    component: CreateComment
   }
 ]
 
