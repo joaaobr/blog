@@ -5,6 +5,7 @@ import Auth from '../views/Auth.vue'
 import CreatePost from '../views/CreatePost.vue'
 import Post from '../views/Post.vue'
 import CreateComment from '../views/CreateComment.vue'
+import UserPage from '../views/UserPage.vue'
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: '/comment/:name/:title',
     name: 'comment',
     component: CreateComment
+  },
+  {
+    path: '/user/:name',
+    name: 'UserPage',
+    component: UserPage
   }
 ]
 

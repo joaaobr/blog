@@ -30,6 +30,8 @@ module.exports = (app) => {
 
     app.post('/comment/update/:id', CommentController.update)
 
+    app.post('/comment/getCommentsByName', CommentController.getCommentsByName)
+
     app.post('/comment/find/', CommentController.find)
 
     app.post('/comment/', CommentController.comments)

@@ -93,6 +93,39 @@ module.exports = {
         } catch(err) {
             return res.status(500).json({ error: err.message })
         }
+    },
+
+    async getPost(req, res) {
+        const { name, title } = req.body
+        
+        try {
+            const checkPost = await Post.find({ name, title })
+    
+            if(!checkPost) return res.status(404).json({ message: "Post not exists!" })
+            
+            return res.status(200).json({ message: checkPost })
+        } catch(err) {
+            return res.status(500).json({ err })
+        }
+    },
+
+    async getCommentsByName(req, res) {
+        const { name } = req.body
+
+        if(!name) return res.status(404).json({ message: "name is not valid!" })
+
+        try {
+
+            const checkName = await Comment.find({ name })
+
+            if(!checkName) return res.status(404).json({ message: "name is not valid!" })
+
+            return res.status(200).json({ message: checkName })
+        } catch(err) {
+            return res.status(500).json({ err })
+        }
+
+
     }
 
 

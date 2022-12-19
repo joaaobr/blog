@@ -1,0 +1,44 @@
+body {
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;
+}
+
+#container {
+    position: absolute;
+    top: 10%;
+    left: 15%;
+    height: 90vh;
+    width: 95vh;
+}   
+
+a {
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 18px;
+    text-decoration: none;
+    color: rgb(55, 55, 55);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+li {
+    list-style: none;
+    margin-left: 10px;
+    color: black;
+}
+
+hr {
+    border: 1px solid rgb(236, 235, 235);  
+}
+
+h1 {
+    font-size: 31px;
+    color: rgb(55, 55, 55);
+}
+
+h2 {
+    font-size: 25px; 
+    color: rgb(55, 55, 55);
+}
