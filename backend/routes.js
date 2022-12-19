@@ -10,7 +10,7 @@ module.exports = (app) => {
 
     app.post('/user/update/:id', UserController.update)
     
-    app.post('/user/getUserByEmail', UserController.getUserByEmail)
+    app.post('/user/getUserByToken', UserController.getUserByToken)
 
     app.post('/post/create', PostController.create)
     
@@ -19,6 +19,8 @@ module.exports = (app) => {
     app.post('/post/delete/:id', PostController.delete)
     
     app.post('/post/getPost', PostController.getPost)
+
+    app.post('/post/getPostsByUser', PostController.getPostsByUser)
 
     app.post('/post', PostController.posts)
 

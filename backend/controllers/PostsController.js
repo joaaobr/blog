@@ -86,5 +86,24 @@ module.exports = {
         } catch(err) {
             return res.status(500).json({ err })
         }
+    },
+
+    async getPostsByUser(req, res) {
+        const { name } = req.body
+
+        if(!name) return res.status(404).json({ message: "name is not valid!" })
+
+        try {
+
+            const checkPost = await Post.find({ name })
+
+            if(!checkPost) return res.status(404).json({ message: "name is not valid!" })
+
+            return res.status(200).json({ message: checkPost })
+        } catch(err) {
+            return res.status(500).json({ err })
+        }
+
+
     }
 }

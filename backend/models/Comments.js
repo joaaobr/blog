@@ -15,7 +15,6 @@ const CommentSchema = new mongoose.Schema({
     },
     post_id: {
         type: mongoose.Types.ObjectId,
-        unique: true,
         required: true
     }
 })
