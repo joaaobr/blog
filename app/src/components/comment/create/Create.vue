@@ -37,7 +37,7 @@ export default {
 
             await axios.post("http://localhost:3000/post/getPost", data)
             .then(data => this.post_id = data.data.message[0]._id)
-            .catch(err => console.log("err ",err))
+            .catch(err => alert("There was an error"))
         },
 
         async createComment() {
