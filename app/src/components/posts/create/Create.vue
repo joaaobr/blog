@@ -53,9 +53,9 @@ export default {
     async getEmail() {
       const token = window.localStorage.getItem("token")
 
-      await axios.post("http://localhost:3000/user/getUserByEmail", { token })
+      await axios.post("http://localhost:3000/user/getUserByToken", { token })
       .then(data => {
-        if(data.data.message) this.email = data.data.message
+        if(data.data.message) this.email = data.data.message.email
       })
       .catch(err => {
         window.location.href = "/auth"

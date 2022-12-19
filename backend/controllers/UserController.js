@@ -79,7 +79,7 @@ module.exports = {
         }
     },
 
-   async getUserByEmail(req, res) {
+   async getUserByToken(req, res) {
     const { token } = req.body
 
     jwt.verify(token, SECRET, async (err, data) => {
@@ -90,7 +90,7 @@ module.exports = {
 
         if(!checkIdExists) return res.status(404).json({ message: "id is not valid!" })
 
-        return res.status(200).json({ message: checkIdExists.email })
+        return res.status(200).json({ message: checkIdExists })
     })
 
 
