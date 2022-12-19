@@ -1,24 +1,4 @@
-<template>
-<body>
-    <div>
-        <p id="name" :style="{width: nameLength * 11 + 'px'}"> {{ name }} </p>
-        <h1 id="title">{{ title }}</h1>
-        <br>
-        <p>{{ message }}</p>
-        <br>
-        <a :href="`/comment/${name}/${title}`">Reply</a>
-        <br>
-        <li v-for="comment in comments" :key="comment">
-            <br>
-            <p id="name" :style="{width: comment.name.length * 11 + 'px'}">{{comment.name}}</p>
-            <p id="comment">{{comment.message}}</p>
-        </li>
-    </div>
-
-        
-
-</body>
-</template>
+<template src="./getPost.html"></template>
 
 <script>
 import axios from 'axios'
@@ -31,6 +11,7 @@ export default {
             message: null,
             name: null,
             nameLength: 0,
+            titleLength: 0,
             id: null,
             comments: []
         }
@@ -54,7 +35,9 @@ export default {
                 this.message = data.data.message[0].message
                 this.name = data.data.message[0].name
                 this.id = data.data.message[0]._id
+
                 this.nameLength = data.data.message[0].name.length
+                this.titleLength = data.data.message[0].title.length
             })
 
         },
@@ -69,4 +52,4 @@ export default {
 }
 </script>
 
-<style scoped src="./get.css"></style>
+<style scoped src="./getPost.css"></style>
