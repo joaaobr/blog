@@ -2,10 +2,16 @@
 <header>
     <nav>
         <a class="logo" href="/">Blog</a>
-        <ul class="nav-list">
+        <ul v-if="isLogged" class="nav-list">
             <li><a href="/">Posts</a></li>
             <li><a href="/post/create">Create new post</a></li>
             <li><a :href="`/user/${name}`">{{name}}</a></li>
+        </ul>
+
+        <ul v-else class="nav-list">
+            <li><a href="/">Posts</a></li>
+            <li><a href="/register">Register</a></li>
+            <li><a href="/auth">Auth</a></li>
         </ul>
     </nav>
 </header>

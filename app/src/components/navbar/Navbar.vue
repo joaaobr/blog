@@ -8,12 +8,14 @@ export default {
     data() {
         return {
             name: null,
-            id: null
+            id: null,
+            isLogged: false
         }
     },
 
-    mounted() {
-        this.getUserData()
+    async mounted() {
+        await this.verifyToken()
+        await this.getUserData()
     },
 
     methods: {
@@ -28,9 +30,23 @@ export default {
             .catch(err => window.location.href = "/auth")
         },
 
+        async verifyToken() {
+            const token = this.getToken()
+
+            if(!token) return this.isLogged = false
+
+            const headers = {
+                authorization: `Bearer ${token}` 
+            }
+        
+            await axios.post("http://localhost:3000/auth/validate", {}, { headers })
+            .then(data => this.isLogged = true)
+            .catch(err => this.isLogged = false)
+        },
+
         getToken() {
             return window.localStorage.getItem("token")
-        }
+        } 
     }
 }
 </script>
