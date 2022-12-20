@@ -49,7 +49,7 @@ export default {
 
             await axios.post("http://localhost:3000/comment/create", data)
             .then(data => { 
-                alert("comment created successfully") 
+                alert("Comment created successfully!") 
                 window.location.href = `/post/${this.name}/${this.title}`
             })
             .catch(err => window.location.href = '/')

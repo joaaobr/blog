@@ -10,8 +10,8 @@ export default {
             title: null,
             message: null,
             name: null,
-            nameLength: 0,
-            titleLength: 0,
+            nameWidth: 0,
+            titleWidth: 0,
             id: null,
             comments: []
         }
@@ -20,6 +20,8 @@ export default {
     async mounted() {
         await this.getPost()
         await this.getComments()
+        this.setNameWidth()
+        this.setTitleWidth()
     },
 
     methods: {
@@ -35,9 +37,6 @@ export default {
                 this.message = data.data.message[0].message
                 this.name = data.data.message[0].name
                 this.id = data.data.message[0]._id
-
-                this.nameLength = data.data.message[0].name.length
-                this.titleLength = data.data.message[0].title.length
             })
 
         },
@@ -46,6 +45,14 @@ export default {
             .then(data => {
                 this.comments = data.data.message
             })
+        },
+
+        setNameWidth() {
+            this.nameWidth = this.name.length * 11 + 'px'
+        },
+
+        setTitleWidth() {
+            this.titleWidth = this.title.length * 11 + 'px'
         }
     }
 

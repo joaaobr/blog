@@ -18,9 +18,7 @@ mounted() {
 methods: {
     async getPosts() {
         await axios.post("http://localhost:3000/post")
-        .then(data => {
-            if(data.data.message) this.posts = data.data.message
-        })
+        .then(data => this.posts = data.data.message)
     }
 }
 }

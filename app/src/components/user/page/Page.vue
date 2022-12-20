@@ -1,26 +1,4 @@
-<template>
-    <body>
-        <div id="container">
-            <h1>{{ name }}</h1>
-            <br>
-            <hr>
-            <br>
-
-            <h2>Posts</h2>
-            <li v-for="(post, index) in posts" :key="post">
-                <br>
-                <a :href="`/post/${post.name}/${post.title}`">{{index+1}}.{{post.title}}</a>
-            </li> 
-
-            <br>
-            <h2>Comments</h2>
-            <li v-for="(comment, index) in comments" :key="comment">
-                <br>
-                <a :href="`/comment/${comment.name}/${index}`">{{index+1}}.{{comment.message}}</a>
-            </li> 
-        </div>
-    </body>
-</template>
+<template src="./page.html"></template>
 
 <script>
 import axios from 'axios'
@@ -35,9 +13,9 @@ export default {
         }
     },
 
-    mounted() {
-        this.getPosts()
-        this.getComments()
+    async mounted() {
+        await this.getPosts()
+        await this.getComments()
     },
 
     methods: {

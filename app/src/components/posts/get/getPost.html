@@ -1,6 +1,6 @@
 <body>
     <div id="container">
-        <p id="name" :style="{width: nameLength * 11 + 'px'}"> {{ name }} </p>
+        <p id="name" :style="{width: nameWidth}"> {{ name }} </p>
         <h1 id="title">{{ title }}</h1>
         <br>
         <p>{{ message }}</p>
@@ -8,7 +8,7 @@
         <a :href="`/comment/create/${name}/${title}`">Reply</a>
         <li v-for="comment in comments" :key="comment">
             <br>
-            <p id="name" :style="{width: comment.name.length * 11 + 'px'}">{{comment.name}}</p>
+            <p id="name" :style="{width: titleWidth}">{{ comment.name }}</p>
             <p id="comment">{{comment.message}}</p>
         </li>
     </div>

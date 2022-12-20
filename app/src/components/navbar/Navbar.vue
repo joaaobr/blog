@@ -18,17 +18,18 @@ export default {
 
     methods: {
         async getUserData() {
-            const token = window.localStorage.getItem("token")
+            const token = this.getToken()
 
             await axios.post("http://localhost:3000/user/getUserByToken", { token })
             .then(data => {
-                console.log(data)
                 this.name = data.data.message.name
                 this.id = data.data.message._id
             })
-            .catch(err => {
-                window.location.href = "/auth"
-            })
+            .catch(err => window.location.href = "/auth")
+        },
+
+        getToken() {
+            return window.localStorage.getItem("token")
         }
     }
 }

@@ -10,16 +10,6 @@ div {
     height: 83vh;
 }
 
-input {
-    padding: 16px;
-    width: 69vh;
-    border: none;
-    outline: none;
-    font-size: 15px;
-    border: 1px solid rgb(226, 219, 219);
-    border-radius: 2px;
-}
-
 button {
     background-color: dodgerblue;
     border: none;

@@ -3,14 +3,11 @@
   <div>
       <h1>Create new post</h1>
       <br><br>
-
       <input type="text" v-model="title" placeholder="Title">
       <br><br>
-
       <textarea id="message" v-model="message"></textarea>
       <br><br>
-
-      <button v-on:click="publish">Publish</button>
+      <button :click="publish">Publish</button>
   </div>
 </body>
 </template>
@@ -41,25 +38,20 @@ export default {
       }
 
       await axios.post("http://localhost:3000/post/create", data)
-      .then(data => {
-        if(data.data.message) alert("Post created successfully")
-      })
-      .catch(err => {
-          alert("There was an error") 
-      })
-      
+      .then(data => alert("Post created successfully"))
+      .catch(err => alert("There was an error") )
     },
 
     async getEmail() {
-      const token = window.localStorage.getItem("token")
+      const token = this.getToken()
 
       await axios.post("http://localhost:3000/user/getUserByToken", { token })
-      .then(data => {
-        if(data.data.message) this.email = data.data.message.email
-      })
-      .catch(err => {
-        window.location.href = "/auth"
-      })
+      .then(data => this.email = data.data.message.email)
+      .catch(err => window.location.href = "/auth")
+    },
+
+    getToken() {
+      return window.localStorage.getItem("token")
     }
   }
 

@@ -3,11 +3,9 @@
     <div id="container">
         <p id="title"> Replying to <a id="linkPost" :href="`/post/${name}/${title}`">{{ title }}</a></p>
         <br>
-
-         <p id="name" :style="{width: nameLength * 11 + 'px'}"> <a :href="`/user/${name}`">{{ this.$route.params.name }}</a></p>
-         <br>
-
-         <p id="comment">{{ comment }}</p>
+        <p id="name" :style="{width: nameWidth}"> <a :href="`/user/${name}`">{{ this.$route.params.name }}</a></p>
+        <br>
+        <p id="comment">{{ comment }}</p>
     </div>
 </body>
 </template>
@@ -22,7 +20,7 @@ export default {
             name: null,
             title: null,
 
-            nameLength: 0,
+            nameWidth: 0,
             index: this.$route.params.index,
             comment: null,
             idComment: null,
@@ -32,8 +30,8 @@ export default {
     },
 
     async mounted() {
+        this.setNameWidth()
         await this.GetComment()
-        this.nameLength = this.$route.params.name.length
         await this.getDataPost()
     },
 
@@ -54,16 +52,19 @@ export default {
 
         async getDataPost() {
             const data = {
-                    id: this.id
+                id: this.id
             }
     
             await axios.post("http://localhost:3000/post/getPostById", data)
             .then(data => {
-                console.log(data)
                 this.name = data.data.message.name
                 this.title = data.data.message.title
             })
             .catch(err => window.location.href = "/")
+        },
+
+        setNameWidth() {
+            this.nameWidth = this.$route.params.name.length * 11 + 'px'
         }
     }
 

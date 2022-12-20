@@ -2,32 +2,6 @@ body {
     font-family: 'Courier New', Courier, monospace;  
 }
 
-#container {
-    position: absolute;
-    top: 10%;
-    left: 15%;
-    height: 90vh;
-    width: 95vh;
-}
-
-
-
-#name {
-    padding: 1px;
-    background-color: rgb(180, 230, 255);
-    border: none;
-    text-align: center;
-    align-items: center;
-    border-radius: 4px;
-    color: rgb(55, 60, 210);
-    font-size: 15px;
-}
-
-#title {
-    font-size: 35px;
-    letter-spacing: 1px;
-}   
-
 a {
     padding: 5px;
     width: 125%;
@@ -69,3 +43,27 @@ li {
 #comment {
     margin-top: 10px;
 }
+
+#container {
+    position: absolute;
+    top: 10%;
+    left: 15%;
+    height: 90vh;
+    width: 95vh;
+}
+
+#name {
+    padding: 1px;
+    background-color: rgb(180, 230, 255);
+    border: none;
+    text-align: center;
+    align-items: center;
+    border-radius: 4px;
+    color: rgb(55, 60, 210);
+    font-size: 15px;
+}
+
+#title {
+    font-size: 35px;
+    letter-spacing: 1px;
+}  

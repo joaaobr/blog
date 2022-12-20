@@ -28,7 +28,6 @@ button {
     border-radius: 10px;
     color: rgb(255, 255, 255);
     font-size: 16px;
-    display: block;
     margin-left: auto;
     margin-right: auto
 }
@@ -42,7 +41,7 @@ button:hover {
 textarea {      
     border: 1px solid rgb(226, 219, 219);
     width: 68vh;
-    height: 62vh;
+    height: 58vh;
     font-size: 14px;
     resize: none;
     display: flex;
