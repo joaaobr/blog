@@ -36,7 +36,7 @@ const routes = [
   },
   {
     path: '/comment/create/:name/:title',
-    name: 'comment',
+    name: 'createComment',
     component: CreateComment
   },
   {
