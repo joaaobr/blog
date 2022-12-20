@@ -22,6 +22,8 @@ module.exports = (app) => {
 
     app.post('/post/getPostsByUser', PostController.getPostsByUser)
 
+    app.post('/post/getPostById', PostController.getPostById)
+
     app.post('/post', PostController.posts)
 
     app.post('/comment/create', CommentController.create)
@@ -31,6 +33,7 @@ module.exports = (app) => {
     app.post('/comment/update/:id', CommentController.update)
 
     app.post('/comment/getCommentsByName', CommentController.getCommentsByName)
+
 
     app.post('/comment/find/', CommentController.find)
 

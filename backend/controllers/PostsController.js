@@ -105,5 +105,22 @@ module.exports = {
         }
 
 
+    },
+
+    async getPostById(req, res) {
+        const { id } = req.body
+
+        if(!id) return res.status(404).json({ message: "id is not valid!" })
+
+        try {
+            const checkId = await Post.findById(id)
+            
+            if(!checkId) return res.status(404).json({ message: "id is not valid!" })
+
+            return res.status(200).json({ message: checkId })
+        } catch(err) {
+            return res.status(500).json({ err })
+        }
+
     }
 }

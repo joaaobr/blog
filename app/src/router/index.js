@@ -6,6 +6,7 @@ import CreatePost from '../views/CreatePost.vue'
 import Post from '../views/Post.vue'
 import CreateComment from '../views/CreateComment.vue'
 import UserPage from '../views/UserPage.vue'
+import ViewComment from '../views/ViewComment.vue'
 
 const routes = [
   {
@@ -34,7 +35,7 @@ const routes = [
     component: Post
   },
   {
-    path: '/comment/:name/:title',
+    path: '/comment/create/:name/:title',
     name: 'comment',
     component: CreateComment
   },
@@ -42,6 +43,11 @@ const routes = [
     path: '/user/:name',
     name: 'UserPage',
     component: UserPage
+  },
+  {
+    path: '/comment/:name/:index',
+    name: 'ViewComment',
+    component: ViewComment
   }
 ]
 
