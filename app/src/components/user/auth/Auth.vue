@@ -1,15 +1,13 @@
 <template>
   <body>
-    <div v-if="tokenNotValid">
+    <div v-if="isLogged">
         <h1>Auth</h1>
-
+        <br>
         <input type="email" placeholder="E-mail" v-model="email">
         <br><br>
-
         <input type="password" placeholder="Password" v-model="password">
         <br><br>
-
-        <button v-on:click="register">Send</button>
+        <button v-on:click="auth">Send</button>
     </div>
 </body>
 </template>
@@ -24,25 +22,16 @@ export default {
       name: null,
       email: null,
       password: null,
-      tokenNotValid: false
+      isLogged: false
     }
   },
-  async mounted() {
-    const token = window.localStorage.getItem("token")
 
-    if(!token) return this.tokenNotValid = true
-
-    await axios.post("http://localhost:3000/auth/validate", {}, {
-      headers: { "authorization": `Bearer ${token}` }
-    })
-    .then(data => {
-      if(data.data.message) window.location.href = '/'
-    })
-    .catch(err => this.tokenNotValid = true)
+  mounted() {
+    this.validateToken()
   },
 
   methods: {
-    async register() {
+    async auth() {
       const data = {
         email: this.email,
         password: this.password,
@@ -50,10 +39,8 @@ export default {
 
       await axios.post("http://localhost:3000/auth/", data)
       .then(data => {
-        if(data.data.message) {
           window.localStorage.setItem("token", data.data.message)
           window.location.href = '/'
-        }
       })
       .catch(err => {
         if(err.response.status == 404) {
@@ -63,10 +50,29 @@ export default {
         }
       })
       
+    },
+
+    async validateToken() {
+      const token = this.getToken()
+
+      if(!token) return this.isLogged = true
+
+      const headers = {
+        authorization: `Bearer ${token}` 
+      }
+  
+      await axios.post("http://localhost:3000/auth/validate", {}, { headers })
+      .then(data => window.location.href = '/')
+      .catch(err => this.isLogged = true)
+    },
+  
+    getToken() {
+      return window.localStorage.getItem("token")
     }
   }
+
 
 }
 </script>
 
-<style src="../assets/css/register.css" scoped></style>
+<style scoped src="./auth.css"></style>

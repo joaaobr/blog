@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 100px;
+}
+
+input {
+    padding: 17px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    border: 1px solid rgb(226, 219, 219);
+    border-radius: 2px;
+}
+
+button {
+    background-color: dodgerblue;
+    border: none;
+    padding: 16px;
+    width: 100%;
+    border-radius: 10px;
+    color: white;
+    font-size: 15px;
+    
+}
+
+button:hover {
+    background-color: deepskyblue;
+    cursor: pointer;
+}
+
+div h1 {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}

@@ -34,7 +34,6 @@ module.exports = (app) => {
 
     app.post('/comment/getCommentsByName', CommentController.getCommentsByName)
 
-
     app.post('/comment/find/', CommentController.find)
 
     app.post('/comment/', CommentController.comments)

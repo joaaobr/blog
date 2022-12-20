@@ -1,17 +1,14 @@
 <template>
   <body>
     <div>
-        <h1>Register</h1>
-        
+        <h1>Register</h1>  
+        <br>
         <input type="text" placeholder="Name" v-model="name">
         <br><br>
-
         <input type="email" placeholder="E-mail" v-model="email">
         <br><br>
-
         <input type="password" placeholder="Password" v-model="password">
         <br><br>
-
         <button v-on:click="register">Send</button>
     </div>
 </body>
@@ -30,7 +27,6 @@ export default {
     }
   },
   methods: {
-    
     async register() {
       const data = {
         name: this.name,
@@ -39,16 +35,14 @@ export default {
       }
 
       await axios.post("http://localhost:3000/user/create", data)
-      .then(data => {
-        if(data.data.message) alert("Account created successfully")
-      })
+      .then(data => alert("Account created successfully"))
       .catch(err => {
         if(err.response.status == 404) {
           window.alert(err.response.data.message)
         } else {
           if(err) alert("There was an error") 
         }
-        })
+      })
       
     }
   }
@@ -56,4 +50,4 @@ export default {
 }
 </script>
 
-<style src="../assets/css/register.css" scoped></style>
+<style src="./register.css" scoped></style>

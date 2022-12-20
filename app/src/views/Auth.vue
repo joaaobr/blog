@@ -1,13 +1,13 @@
 <template>
-    <AuthUser></AuthUser>
+    <Auth></Auth>
 </template>
 
 <script>
-import AuthUser from '@/components/AuthUser.vue';
+import Auth from '@/components/user/auth/Auth.vue';
 export default { 
-  name: 'HomeView',
+  name: 'AuthUser',
   components: {
-    AuthUser
+    Auth
   }
 }
 </script>
