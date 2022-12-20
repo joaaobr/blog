@@ -4,8 +4,8 @@
 </template>
 
 <script>
-import Posts from '@/components/posts/display/Posts.vue';
 import Navbar from '@/components/navbar/Navbar.vue';
+import Posts from '@/components/posts/display/Posts.vue';
 export default { 
   name: 'HomeView',
   components: {

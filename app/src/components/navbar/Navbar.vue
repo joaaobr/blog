@@ -27,7 +27,6 @@ export default {
                 this.name = data.data.message.name
                 this.id = data.data.message._id
             })
-            .catch(err => window.location.href = "/auth")
         },
 
         async verifyToken() {
