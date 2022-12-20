@@ -5,10 +5,10 @@ body {
 
 div {
     position: absolute;
-    top: 13%;
-    left: 26%;
-    transform: translate(-50%,-50%);
-    height: 5vh;
+    top: 11%;
+    left: 22%;
+    height: 92vh;
+    width: 99vh;
 }
 
 a {
