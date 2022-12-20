@@ -16,7 +16,7 @@
             <h2>Comments</h2>
             <li v-for="(comment, index) in comments" :key="comment">
                 <br>
-                <a>{{index+1}}.{{comment.message}}</a>
+                <a :href="`/comment/${comment.name}/${index}`">{{index+1}}.{{comment.message}}</a>
             </li> 
         </div>
     </body>
