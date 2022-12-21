@@ -2,7 +2,7 @@ body {
     font-family: 'Courier New', Courier, monospace;  
 }
 
-a {
+#reply {
     padding: 5px;
     width: 125%;
     border: 1px solid rgb(215, 215, 225);
@@ -13,7 +13,7 @@ a {
     color: black;
 }
 
-a:hover {
+#reply:hover {
     background-color: rgb(250, 250, 245);
     transition: 0.5;
 }
@@ -52,6 +52,11 @@ li {
     width: 95vh;
 }
 
+#title {
+    font-size: 35px;
+    letter-spacing: 1px;
+}  
+
 #name {
     padding: 1px;
     background-color: rgb(180, 230, 255);
@@ -63,7 +68,12 @@ li {
     font-size: 15px;
 }
 
-#title {
-    font-size: 35px;
-    letter-spacing: 1px;
-}  
+#name a {
+    padding: 0;
+    text-decoration: none;
+}
+
+#name a:hover {
+    padding: 0;
+    text-decoration: underline;
+}

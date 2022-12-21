@@ -1,14 +1,18 @@
 <body>
     <div id="container">
-        <p id="name" :style="{width: nameWidth}"> {{ name }} </p>
+        <p id="name" :style="{width: nameWidth}">
+            <a :href="`/user/${this.name}`"> {{ name }} </a>
+        </p>
         <h1 id="title">{{ title }}</h1>
         <br>
         <p>{{ message }}</p>
         <br>
-        <a :href="`${this.replyLink}`">Reply</a>
+        <a id="reply" :href="`${this.replyLink}`">Reply</a>
         <li v-for="comment in comments" :key="comment">
             <br>
-            <p id="name" :style="{width: titleWidth}">{{ comment.name }}</p>
+            <p id="name" :style="{width: comment.name.length * 11 + 'px'}">
+                <a :href="`/user/${comment.name}`">{{ comment.name }}</a>
+            </p>
             <p id="comment">{{comment.message}}</p>
         </li>
     </div>
