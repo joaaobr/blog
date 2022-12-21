@@ -43,7 +43,7 @@ module.exports = {
 
                 if(!verifyId) return res.status(404).json({ message: "token is not valid!" }) 
 
-                if(verifyId) return res.status(200).json({ message: "ok" }) 
+                if(verifyId) return res.status(200).json({ message: data._id }) 
             });
         } catch (err) {
             return res.status(500).json({ err });

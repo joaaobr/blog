@@ -95,20 +95,6 @@ module.exports = {
         }
     },
 
-    async getPost(req, res) {
-        const { name, title } = req.body
-        
-        try {
-            const checkPost = await Post.find({ name, title })
-    
-            if(!checkPost) return res.status(404).json({ message: "Post not exists!" })
-            
-            return res.status(200).json({ message: checkPost })
-        } catch(err) {
-            return res.status(500).json({ err })
-        }
-    },
-
     async getCommentsByName(req, res) {
         const { name } = req.body
 
