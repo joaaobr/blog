@@ -21,8 +21,10 @@ export default {
     async mounted() {
         await this.getPost()
         await this.getComments()
+        await this.setReplyLink()
         this.setNameWidth()
         this.setTitleWidth()
+        
     },
 
     methods: {
@@ -56,7 +58,7 @@ export default {
             this.titleWidth = this.title.length * 11 + 'px'
         },
 
-        async verifyToken() {
+        async setReplyLink() {
             const token = this.getToken()
 
             if(!token) this.replyLink = "/auth"
@@ -66,8 +68,7 @@ export default {
             }
 
             await axios.post("http://localhost:3000/auth/validate", {}, { headers })
-            .then(err => this.isLogged = `/comment/create/${this.name}/${this.title}`)
-            .catch(err => this.replyLink = "/auth")
+            .then(err => this.replyLink = `/comment/create/${this.name}/${this.title}`)
         },
 
         getToken() {
