@@ -44,3 +44,31 @@ a:hover {
     font-size: 20px;
     font-family:'Courier New', Courier, monospace;
 }
+
+button {
+    padding: 3px;
+    width: 12%;
+    border: 1px solid rgb(215, 215, 225);
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 15px;
+    text-decoration: none;
+    color: black;
+}
+
+button:hover {
+    background-color: rgb(230, 230, 225);
+    transition: 0.5;
+}
+
+#update {
+    margin-left: 10px;
+}
+
+#update a {
+    color: black;
+}
+
+#update a:hover {
+    text-decoration: none;
+}

@@ -7,6 +7,7 @@ import Post from '../views/Post.vue'
 import CreateComment from '../views/CreateComment.vue'
 import UserPage from '../views/UserPage.vue'
 import ViewComment from '../views/ViewComment.vue'
+import UpdateComment from '../views/UpdateComment.vue'
 
 const routes = [
   {
@@ -48,6 +49,11 @@ const routes = [
     path: '/comment/:name/:index',
     name: 'ViewComment',
     component: ViewComment
+  },
+  {
+    path: '/comment/update/:id',
+    name: 'UpdateComment',
+    component: UpdateComment
   }
 ]
 

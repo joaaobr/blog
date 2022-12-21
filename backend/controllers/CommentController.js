@@ -101,12 +101,28 @@ module.exports = {
         if(!name) return res.status(404).json({ message: "name is not valid!" })
 
         try {
-
             const checkName = await Comment.find({ name })
 
             if(!checkName) return res.status(404).json({ message: "name is not valid!" })
 
             return res.status(200).json({ message: checkName })
+        } catch(err) {
+            return res.status(500).json({ err })
+        }
+
+    },
+
+    async getCommentById(req, res) {
+        const { id } = req.body
+
+        if(!id) return res.status(404).json({ message: "id is not valid!" })
+
+        try {
+            const checkId = await Comment.findById(id)
+
+            if(!checkId) return res.status(404).json({ message: "id is not valid!" })
+
+            return res.status(200).json({ message: checkId })
         } catch(err) {
             return res.status(500).json({ err })
         }

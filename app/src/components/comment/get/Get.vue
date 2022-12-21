@@ -6,6 +6,12 @@
         <p id="name" :style="{width: nameWidth}"> <a :href="`/user/${name}`">{{ this.$route.params.name }}</a></p>
         <br>
         <p id="comment">{{ comment }}</p>
+
+        <div id="changers" v-if="commentIsMine">
+            <br>
+            <button id="delete" v-on:click="deleteComment">Delete</button>
+            <button id="update"><a :href="`/comment/update/${this.idComment}`">Update</a></button>
+        </div>
     </div>
 </body>
 </template>
@@ -19,7 +25,7 @@ export default {
         return{
             name: null,
             title: null,
-
+            commentIsMine: false,
             nameWidth: 0,
             index: this.$route.params.index,
             comment: null,
@@ -33,6 +39,7 @@ export default {
         this.setNameWidth()
         await this.GetComment()
         await this.getDataPost()
+        await this.checkIfTheCommentIsMine()
     },
 
     methods: {
@@ -60,11 +67,37 @@ export default {
                 this.name = data.data.message.name
                 this.title = data.data.message.title
             })
-            .catch(err => window.location.href = "/")
+        },
+
+        async checkIfTheCommentIsMine() {
+            const data = {
+                token: this.getToken()
+            }
+    
+            await axios.post("http://localhost:3000/user/getUserByToken", data)
+            .then(data => {
+                if(data.data.message.name === this.name) this.commentIsMine = true
+            })
+        },
+
+        getToken() {
+            return window.localStorage.getItem("token")
         },
 
         setNameWidth() {
             this.nameWidth = this.$route.params.name.length * 11 + 'px'
+        },
+
+        async deleteComment() {
+            const data = {
+                token: this.getToken()
+            }
+    
+            await axios.post(`http://localhost:3000/comment/delete${this.idComment}`)
+            .then(data => {
+                this.comment = "Successfully deleted comment."
+            })
+            .catch(err => alert("There was an error"))
         }
     }
 

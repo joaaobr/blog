@@ -67,7 +67,7 @@ export default {
             }
 
             await axios.post("http://localhost:3000/auth/validate", {}, { headers })
-            .then(err => this.isLogged = true)
+            .then(data => this.isLogged = true)
             .catch(err => window.location.href = '/auth')
         },
 
