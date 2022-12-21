@@ -1,6 +1,6 @@
 <template>
 <body>
-  <div>
+  <div v-if="isLogged">
       <h1>Create new post</h1>
       <br><br>
       <input type="text" v-model="title" placeholder="Title">
@@ -21,12 +21,14 @@ export default {
     return {
       title: null,
       message: null,
-      email: null
+      email: null,
+      isLogged: false
     }
   },
 
-  mounted() {
-    this.getEmail()
+  async mounted() {
+    await this.verifyToken()
+    await this.getEmail()
   },
 
   methods: {
@@ -48,6 +50,20 @@ export default {
       await axios.post("http://localhost:3000/user/getUserByToken", { token })
       .then(data => this.email = data.data.message.email)
       .catch(err => window.location.href = "/auth")
+    },
+
+    async verifyToken() {
+        const token = this.getToken()
+
+        if(!token) window.location.href = '/auth'
+
+        const headers = {
+            authorization: `Bearer ${token}` 
+        }
+
+        await axios.post("http://localhost:3000/auth/validate", {}, { headers })
+        .then(err => this.isLogged = true)
+        .catch(err => window.location.href = '/auth')
     },
 
     getToken() {
