@@ -1,6 +1,6 @@
 <template>
     <body>
-    <div>
+    <div v-if="isLogged">
         <h1>Create comment for the post {{title}} </h1>
         <br>
         <textarea v-model="message" rows="10"></textarea>
@@ -17,15 +17,17 @@ export default {
     name: "CreateComment",
     data() {
         return {
+            isLogged: false,
             post_id: null,
             message: null,
             title: this.$route.params.title,
-            name: this.$route.params.name
+            name: this.$route.params.name,
         }
     },
 
-    mounted() {
-        this.getPostData()
+    async mounted() {
+        await this.verifyToken()
+        await this.getPostData()
     },
 
     methods: {
@@ -53,6 +55,24 @@ export default {
                 window.location.href = `/post/${this.name}/${this.title}`
             })
             .catch(err => window.location.href = '/')
+        },
+
+        async verifyToken() {
+            const token = this.getToken()
+
+            if(!token) window.location.href = '/auth'
+
+            const headers = {
+                authorization: `Bearer ${token}` 
+            }
+
+            await axios.post("http://localhost:3000/auth/validate", {}, { headers })
+            .then(err => this.isLogged = true)
+            .catch(err => window.location.href = '/auth')
+        },
+
+        getToken() {
+            return window.localStorage.getItem("token")
         }
     }
 }

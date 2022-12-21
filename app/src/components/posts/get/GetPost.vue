@@ -13,7 +13,8 @@ export default {
             nameWidth: 0,
             titleWidth: 0,
             id: null,
-            comments: []
+            comments: [],
+            replyLink: "/auth"
         }
     },
 
@@ -53,6 +54,24 @@ export default {
 
         setTitleWidth() {
             this.titleWidth = this.title.length * 11 + 'px'
+        },
+
+        async verifyToken() {
+            const token = this.getToken()
+
+            if(!token) this.replyLink = "/auth"
+
+            const headers = {
+                authorization: `Bearer ${token}` 
+            }
+
+            await axios.post("http://localhost:3000/auth/validate", {}, { headers })
+            .then(err => this.isLogged = `/comment/create/${this.name}/${this.title}`)
+            .catch(err => this.replyLink = "/auth")
+        },
+
+        getToken() {
+            return window.localStorage.getItem("token")
         }
     }
 
