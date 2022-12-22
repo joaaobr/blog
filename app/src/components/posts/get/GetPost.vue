@@ -14,11 +14,13 @@ export default {
             nameWidth: 0,
             titleWidth: 0,
             comments: [],
-            replyLink: "/auth"
+            replyLink: "/auth",
+            postIsMine: false
         }
     },
 
     async mounted() {
+        await this.checkIfThePostIsMine()
         await this.getPost()
         await this.getComments()
         await this.setReplyLink()
@@ -60,7 +62,7 @@ export default {
         async verifyToken() {
             const token = this.getToken()
 
-            if(!token) this.replyLink = "/auth"
+            if(!token) return
 
             const headers = {
                 authorization: `Bearer ${token}` 
@@ -70,18 +72,39 @@ export default {
             .then(data => this.isLogged = `/comment/create/${this.name}/${this.title}`)
         },
 
-        getToken() {
-            return window.localStorage.getItem("token")
-        },
+        async checkIfThePostIsMine() {
+            const data = {
+                token: this.getToken()
+            }
 
+            await axios.post("http://localhost:3000/user/getUserByToken", data)
+            .then(data => {
+                if(data.data.message.name === this.$route.params.name) this.postIsMine = true
+            })
+        }, 
+        
         async setReplyLink() {
             const token = this.getToken()
+
             if(!token) return
+
             const headers = {
                 authorization: `Bearer ${token}` 
             }
             await axios.post("http://localhost:3000/auth/validate", {}, { headers })
             .then(err => this.replyLink = `/comment/create/${this.name}/${this.title}`)
+        },    
+        
+        async deletePost() {
+            await axios.post(`http://localhost:3000/post/delete/${this.id}`)
+            .then(data => {
+                this.message = "Successfully deleted post."
+            })
+            .catch(err => alert("There was an error"))
+        },
+
+        getToken() {
+            return window.localStorage.getItem("token")
         }
     }
 

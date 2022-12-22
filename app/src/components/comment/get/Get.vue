@@ -89,7 +89,7 @@ export default {
         },
 
         async deleteComment() {
-            await axios.post(`http://localhost:3000/comment/delete${this.idComment}`)
+            await axios.post(`http://localhost:3000/comment/delete/${this.idComment}`)
             .then(data => {
                 this.comment = "Successfully deleted comment."
             })

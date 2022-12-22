@@ -52,7 +52,7 @@ module.exports = {
 
         try {
             const verifyId = await Post.findById(id)
-
+            console.log(verifyId)
             if(!verifyId) return res.status(404).json({ message: "Id is not valid!" })
 
             const post = await Post.findByIdAndDelete(id)

@@ -8,6 +8,14 @@
         <p>{{ message }}</p>
         <br>
         <a id="reply" :href="`${this.replyLink}`">Reply</a>
+
+        <div id="changers" v-if="postIsMine">
+            <br>
+            <button id="delete" v-on:click="deletePost">Delete</button>
+            
+            <button id="update"><a :href="`/post/update/${this.id}`">Update</a></button>
+        </div>
+
         <li v-for="comment in comments" :key="comment">
             <br>
             <p id="name" :style="{width: comment.name.length * 11 + 'px'}">
