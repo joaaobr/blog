@@ -1,10 +1,10 @@
-<template src="./getPost.html"></template>
+<template src="./get.html"></template>
 
 <script>
 import axios from 'axios'
 
 export default {
-    name: "GetPost",
+    name: "Get",
     data() {
         return {
             title: null,
@@ -111,4 +111,4 @@ export default {
 }
 </script>
 
-<style scoped src="./getPost.css"></style>
+<style scoped src="./get.css"></style>

@@ -1,4 +1,4 @@
-<template src="./posts.html"></template>
+<template src="./display.html"></template>
 
 <script>
 import axios from 'axios'
@@ -24,4 +24,4 @@ methods: {
 }
 </script>
 
-<style src="./posts.css" scoped></style>
+<style src="./display.css" scoped></style>

@@ -46,4 +46,4 @@ export default {
 }
 </script>
 
-<style scoped src="./userPage.css"></style>
+<style scoped src="./page.css"></style>
