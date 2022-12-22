@@ -1,8 +1,8 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
-const { DB_HOST } = process.env 
+const { DB_HOST, DB_NAME } = process.env 
 
-mongoose.connect(`mongodb://${DB_HOST}/blog`)
+mongoose.connect(`mongodb://${DB_HOST}/${DB_NAME}`)
 
 const UserSchema = new mongoose.Schema({
     name: {
