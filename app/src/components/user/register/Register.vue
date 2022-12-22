@@ -1,18 +1,4 @@
-<template>
-  <body>
-    <div>
-        <h1>Register</h1>  
-        <br>
-        <input type="text" placeholder="Name" v-model="name">
-        <br><br>
-        <input type="email" placeholder="E-mail" v-model="email">
-        <br><br>
-        <input type="password" placeholder="Password" v-model="password">
-        <br><br>
-        <button v-on:click="register">Send</button>
-    </div>
-</body>
-</template>
+<template src="./register.html"></template>
 
 <script>
 import axios from 'axios'

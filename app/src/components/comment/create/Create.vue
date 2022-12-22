@@ -60,7 +60,7 @@ export default {
         async verifyToken() {
             const token = this.getToken()
 
-            if(!token) window.location.href = '/auth'
+            if(!token) this.redirectToAuth()
 
             const headers = {
                 authorization: `Bearer ${token}` 
@@ -68,11 +68,15 @@ export default {
 
             await axios.post("http://localhost:3000/auth/validate", {}, { headers })
             .then(data => this.isLogged = true)
-            .catch(err => window.location.href = '/auth')
+            .catch(err => this.redirectToAuth())
         },
 
         getToken() {
             return window.localStorage.getItem("token")
+        },
+
+        redirectToAuth() {
+            window.location.href = '/auth'
         }
     }
 }

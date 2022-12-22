@@ -10,9 +10,9 @@ export default {
             title: null,
             message: null,
             name: null,
+            id: null,
             nameWidth: 0,
             titleWidth: 0,
-            id: null,
             comments: [],
             replyLink: "/auth"
         }
@@ -21,7 +21,7 @@ export default {
     async mounted() {
         await this.getPost()
         await this.getComments()
-        await this.setReplyLink()
+        this.setReplyLink
         this.setNameWidth()
         this.setTitleWidth()
         

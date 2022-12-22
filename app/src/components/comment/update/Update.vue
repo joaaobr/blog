@@ -48,7 +48,7 @@ export default {
         async verifyToken() {
             const token = this.getToken()
 
-            if(!token) window.location.href = '/auth'
+            if(!token) this.redirectToAuth()
 
             const headers = {
                 authorization: `Bearer ${token}` 
@@ -59,10 +59,10 @@ export default {
                 if (data.data.message.name === this.name) {
                     this.isLogged = true
                 } else {
-                    window.location.href = '/auth'
+                    this.redirectToAuth()
                 }
             })
-            .catch(err => window.location.href = '/auth')
+            .catch(err => this.redirectToAuth())
         },
 
         getToken() {
@@ -80,6 +80,10 @@ export default {
                 window.location.href = '/'
             })
             .catch(err => alert("There was an error"))
+        },
+
+        redirectToAuth() {
+            window.location.href = '/auth'
         }
     }
 }

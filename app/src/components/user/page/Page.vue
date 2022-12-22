@@ -26,7 +26,7 @@ export default {
 
             await axios.post("http://localhost:3000/post/getPostsByUser", data)
             .then(data => this.posts = data.data.message)
-            .catch(err => window.location.href = "/")
+            .catch(err => this.redirectToHome())
         },
 
         async getComments() {
@@ -36,7 +36,11 @@ export default {
 
             await axios.post("http://localhost:3000/comment/getCommentsByName", data)
             .then(data => this.comments = data.data.message)
-            .catch(err => window.location.href = "/")
+            .catch(err => this.redirectToHome())
+        },
+
+        redirectToHome() {
+            window.location.href = "/"
         }
     }
 }
