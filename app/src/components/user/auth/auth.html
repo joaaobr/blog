@@ -1,0 +1,11 @@
+<body>
+    <div v-if="isLogged">
+        <h1>Auth</h1>
+        <br>
+        <input type="email" placeholder="E-mail" v-model="email">
+        <br><br>
+        <input type="password" placeholder="Password" v-model="password">
+        <br><br>
+        <button v-on:click="auth">Send</button>
+    </div>
+</body>

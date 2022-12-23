@@ -20,7 +20,6 @@ export default {
     },
 
     async mounted() {
-        await this.checkIfThePostIsMine()
         await this.getPost()
         await this.getComments()
         await this.setReplyLink()
@@ -70,17 +69,6 @@ export default {
 
             await axios.post("http://localhost:3000/auth/validate", {}, { headers })
             .then(data => this.isLogged = `/comment/create/${this.name}/${this.title}`)
-        },
-
-        async checkIfThePostIsMine() {
-            const data = {
-                token: this.getToken()
-            }
-
-            await axios.post("http://localhost:3000/user/getUserByToken", data)
-            .then(data => {
-                if(data.data.message.name === this.$route.params.name) this.postIsMine = true
-            })
         }, 
         
         async setReplyLink() {

@@ -1,16 +1,4 @@
-<template>
-<body>
-  <div v-if="isLogged">
-      <h1>Create new post</h1>
-      <br><br>
-      <input type="text" v-model="title" placeholder="Title">
-      <br><br>
-      <textarea id="message" v-model="message"></textarea>
-      <br><br>
-      <button :click="publish">Publish</button>
-  </div>
-</body>
-</template>
+<template src="./create.html"></template>
   
 <script>
 import axios from 'axios'

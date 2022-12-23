@@ -45,7 +45,12 @@ export default {
 
         getToken() {
             return window.localStorage.getItem("token")
-        } 
+        },
+
+        logout() {
+            window.localStorage.removeItem("token")
+            window.location.reload()
+        }
     }
 }
 </script>

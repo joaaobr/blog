@@ -1,16 +1,4 @@
-<template>
-    <body>
-    <div v-if="isLogged">
-        <h1>Update post</h1>
-        <br>
-        <input type="text" v-model="title">
-        <br>
-        <textarea v-model="message" rows="10"></textarea>
-        <br>
-        <button v-on:click="update">Update</button>
-    </div>
-</body>
-</template>
+<template src="./update.html"></template>
 
 <script>
 import axios from 'axios';
@@ -54,11 +42,11 @@ export default {
 
             if(!token) this.redirectToAuth()
 
-            const headers = {
-                authorization: `Bearer ${token}` 
+            const data = {
+                token
             }
 
-            await axios.post("http://localhost:3000/user/getUserByToken", { token })
+            await axios.post("http://localhost:3000/user/getUserByToken", data)
             .then(data => {
                 if (data.data.message.name === this.name) {
                     this.isLogged = true

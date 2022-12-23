@@ -6,6 +6,7 @@
             <li><a href="/">Posts</a></li>
             <li><a href="/post/create">Create new post</a></li>
             <li><a :href="`/user/${name}`">{{name}}</a></li>
+            <li><button v-on:click="logout">Logout</button></li>
         </ul>
 
         <ul v-else class="nav-list">

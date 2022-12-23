@@ -1,7 +1,7 @@
 <template>
 <body>
     <div id="container">
-        <p id="title"> Replying to <a id="linkPost" :href="`/post/${name}/${title}`">{{ title }}</a></p>
+        <p id="title">Replying to <a id="linkPost" :href="`/post/${name}/${title}`">{{ title }}</a></p>
         <br>
         <p id="name" :style="{width: nameWidth}"> <a :href="`/user/${name}`">{{ this.$route.params.name }}</a></p>
         <br>
@@ -25,12 +25,12 @@ export default {
         return{
             name: null,
             title: null,
-            commentIsMine: false,
-            nameWidth: 0,
-            index: this.$route.params.index,
             comment: null,
             idComment: null,
             id: null,
+            commentIsMine: false,
+            nameWidth: 0,
+            index: this.$route.params.index
             
         }
     },
@@ -90,9 +90,7 @@ export default {
 
         async deleteComment() {
             await axios.post(`http://localhost:3000/comment/delete/${this.idComment}`)
-            .then(data => {
-                this.comment = "Successfully deleted comment."
-            })
+            .then(data => this.comment = "Successfully deleted comment.")
             .catch(err => alert("There was an error"))
         }
     }

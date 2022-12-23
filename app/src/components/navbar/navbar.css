@@ -13,6 +13,20 @@ a:hover {
     opacity: 0.8;
 }
 
+button {
+    color: #fff;
+    transition: 0.6s;
+    border: none;
+    letter-spacing: 2px;
+    font-size: 17px;
+    background-color: transparent;
+}
+
+button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
 .logo {
     font-size: 21px;
     text-transform: uppercase;
