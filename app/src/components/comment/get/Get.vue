@@ -53,6 +53,7 @@ export default {
                 this.comment = data.data.message[this.index].message
                 this.id = data.data.message[this.index].post_id
                 this.idComment = data.data.message[this.index]._id
+                this.name = data.data.message[this.index].name
             })
             .catch(err => window.location.href = "/")
         },
@@ -63,10 +64,7 @@ export default {
             }
     
             await axios.post("http://localhost:3000/post/getPostById", data)
-            .then(data => {
-                this.name = data.data.message.name
-                this.title = data.data.message.title
-            })
+            .then(data => this.title = data.data.message.title )
         },
 
         async checkIfTheCommentIsMine() {

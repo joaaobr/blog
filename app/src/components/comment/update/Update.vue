@@ -59,7 +59,7 @@ export default {
                 if (data.data.message.name === this.name) {
                     this.isLogged = true
                 } else {
-                    this.redirectToAuth()
+                    this.redirectToHome()
                 }
             })
             .catch(err => this.redirectToAuth())
@@ -77,13 +77,17 @@ export default {
             await axios.post(`http://localhost:3000/comment/update/${this.id}`, data)
             .then(data => {
                 alert("Comment successfully updated")
-                window.location.href = '/'
+                this.redirectToHome()
             })
             .catch(err => alert("There was an error"))
         },
 
         redirectToAuth() {
             window.location.href = '/auth'
+        },
+
+        redirectToHome() {
+            window.location.href = '/'
         }
     }
 }

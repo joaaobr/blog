@@ -22,15 +22,23 @@ export default {
             message: null,
             title: this.$route.params.title,
             name: this.$route.params.name,
+            username: null
         }
     },
 
     async mounted() {
         await this.verifyToken()
+        await this.getUserData()
         await this.getPostData()
     },
 
     methods: {
+        async getUserData() {
+            const token = this.getToken()
+
+            await axios.post("http://localhost:3000/user/getUserByToken", { token })
+            .then(data => this.username = data.data.message.name)
+        },
         async getPostData() {
             const data = {
                 name: this.name,
@@ -44,7 +52,7 @@ export default {
 
         async createComment() {
             const data = {
-                name: this.name,
+                name: this.username,
                 post_id: this.post_id,
                 message: this.message
             }

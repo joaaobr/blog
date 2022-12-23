@@ -23,6 +23,7 @@ export default {
         await this.getPost()
         await this.getComments()
         await this.setReplyLink()
+        await this.checkIfThePostIsMine()
         this.setNameWidth()
         this.setTitleWidth()
     },
@@ -89,6 +90,17 @@ export default {
                 this.message = "Successfully deleted post."
             })
             .catch(err => alert("There was an error"))
+        },
+
+        async checkIfThePostIsMine() {
+            const data = {
+                token: this.getToken()
+            }
+    
+            await axios.post("http://localhost:3000/user/getUserByToken", data)
+            .then(data => {
+                if(data.data.message.name === this.name) this.postIsMine = true
+            })
         },
 
         getToken() {
