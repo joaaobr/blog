@@ -1,14 +1,4 @@
-<template>
-    <body>
-    <div v-if="isLogged">
-        <h1>Update comment</h1>
-        <br>
-        <textarea v-model="message" rows="10"></textarea>
-        <br>
-        <button v-on:click="update">Update</button>
-    </div>
-</body>
-</template>
+<template src="./update.html"></template>
 
 <script>
 import axios from 'axios';
@@ -17,10 +7,10 @@ export default {
     name: "CreateComment",
     data() {
         return {
-            isLogged: false,
             message: null,
-            id: this.$route.params.id,
-            name: null
+            name: null,
+            isLogged: false,
+            id: this.$route.params.id
         }
     },
 
@@ -50,17 +40,13 @@ export default {
 
             if(!token) this.redirectToAuth()
 
-            const headers = {
-                authorization: `Bearer ${token}` 
-            }
-
             await axios.post("http://localhost:3000/user/getUserByToken", { token })
             .then(data => {
                 if (data.data.message.name === this.name) {
-                    this.isLogged = true
-                } else {
-                    this.redirectToHome()
-                }
+                    return this.isLogged = true
+                } 
+                
+                this.redirectToHome()
             })
             .catch(err => this.redirectToAuth())
         },

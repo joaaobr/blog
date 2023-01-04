@@ -1,0 +1,15 @@
+<body>
+    <div id="container">
+        <p id="title">Replying to <a id="linkPost" :href="`/post/${nameUserOfPost}/${title}`">{{ title }}</a></p>
+        <br>
+        <p id="name" :style="{width: nameWidth}"> <a :href="`/user/${nameUserOfComment}`">{{ this.$route.params.name }}</a></p>
+        <br>
+        <p id="comment">{{ comment }}</p>
+
+        <div id="changers" v-if="commentIsMine">
+            <br>
+            <button id="delete" v-on:click="deleteComment">Delete</button>
+            <button id="update"><a :href="`/comment/update/${this.idComment}`">Update</a></button>
+        </div>
+    </div>
+</body>

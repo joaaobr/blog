@@ -1,14 +1,4 @@
-<template>
-    <body>
-    <div v-if="isLogged">
-        <h1>Create comment for the post {{title}} </h1>
-        <br>
-        <textarea v-model="message" rows="10"></textarea>
-        <br>
-        <button v-on:click="createComment">Send</button>
-    </div>
-</body>
-</template>
+<template src="./create.html"></template>
 
 <script>
 import axios from 'axios';
