@@ -75,6 +75,7 @@ button:hover {
     border-radius: 4px;
     color: rgb(55, 60, 210);
     font-size: 15px;
+    margin-bottom: 6px;
 }
 
 #update a {

@@ -29,7 +29,14 @@ export default {
 
       await axios.post("http://localhost:3000/post/create", data)
       .then(data => alert("Post created successfully"))
-      .catch(err => alert("There was an error") )
+      .catch(err => { 
+        console.log(err)
+        if(err.response.status === 404) {
+          return alert(err.response.data.message)
+        }
+
+        alert("There was an error") 
+    })
     },
 
     async getEmail() {

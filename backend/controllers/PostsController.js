@@ -5,15 +5,18 @@ module.exports = {
     async create(req, res) {
         const { email, title, message } = req.body
 
-        if(!email) return res.status(404).json({ message: "email is not valid!" })
-        if(!message) return res.status(404).json({ message: "message is not valid!" })
-        if(!title) return res.status(404).json({ message: "title is not valid!" })
+        if(!email) return res.status(404).json({ message: "Email is not valid!" })
+        if(!message) return res.status(404).json({ message: "Message is not valid!" })
+        if(!title) return res.status(404).json({ message: "Title is not valid!" })
         
-        try {
-            
+        try {         
             const checkEmail = await User.findOne({ email })
             
             if(!checkEmail) return res.status(404).json({ message: "email is not valid!" })
+
+            const checkIfTitleOfPostExists = await Post.find({ title, name: checkEmail.name })
+
+            if(checkIfTitleOfPostExists) return res.status(404).json({ message: "You have already created a post with this title." })
 
             const post = await Post.create({
                 name: checkEmail.name,
