@@ -1,9 +1,9 @@
 <template>
 <body>
     <div id="container">
-        <p id="title">Replying to <a id="linkPost" :href="`/post/${name}/${title}`">{{ title }}</a></p>
+        <p id="title">Replying to <a id="linkPost" :href="`/post/${nameUserOfPost}/${title}`">{{ title }}</a></p>
         <br>
-        <p id="name" :style="{width: nameWidth}"> <a :href="`/user/${name}`">{{ this.$route.params.name }}</a></p>
+        <p id="name" :style="{width: nameWidth}"> <a :href="`/user/${nameUserOfComment}`">{{ this.$route.params.name }}</a></p>
         <br>
         <p id="comment">{{ comment }}</p>
 
@@ -23,14 +23,15 @@ export default {
     name: "Get",
     data() {
         return{
-            name: null,
+            nameUserOfComment: null,
             title: null,
             comment: null,
             idComment: null,
             id: null,
+            nameUserOfPost: null,
             commentIsMine: false,
             nameWidth: 0,
-            index: this.$route.params.index
+            index: this.$route.params.index,
             
         }
     },
@@ -53,7 +54,7 @@ export default {
                 this.comment = data.data.message[this.index].message
                 this.id = data.data.message[this.index].post_id
                 this.idComment = data.data.message[this.index]._id
-                this.name = data.data.message[this.index].name
+                this.nameUserOfComment = data.data.message[this.index].name
             })
             .catch(err => window.location.href = "/")
         },
@@ -64,7 +65,10 @@ export default {
             }
     
             await axios.post("http://localhost:3000/post/getPostById", data)
-            .then(data => this.title = data.data.message.title )
+            .then(data =>  {
+                this.title = data.data.message.title 
+                this.nameUserOfPost = data.data.message.name
+                })
         },
 
         async checkIfTheCommentIsMine() {
@@ -74,7 +78,7 @@ export default {
     
             await axios.post("http://localhost:3000/user/getUserByToken", data)
             .then(data => {
-                if(data.data.message.name === this.name) this.commentIsMine = true
+                if(data.data.message.name === this.nameUserOfComment) this.commentIsMine = true
             })
         },
 
