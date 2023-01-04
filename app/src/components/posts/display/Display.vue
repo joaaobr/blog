@@ -1,27 +1,28 @@
 <template src="./display.html"></template>
 
 <script>
-import axios from 'axios'
+import axios from "../../../axios.config";
 
 export default {
-name: 'Auth',
-data() {
+  name: "Auth",
+  data() {
     return {
-        posts: []
-    }
-},
+      posts: [],
+    };
+  },
 
-mounted() {
-    this.getPosts() 
-},
+  mounted() {
+    this.getPosts();
+  },
 
-methods: {
+  methods: {
     async getPosts() {
-        await axios.post("http://localhost:3000/post")
-        .then(data => this.posts = data.data.message)
-    }
-}
-}
+      await axios
+        .post(`/post`)
+        .then((data) => (this.posts = data.data.message));
+    },
+  },
+};
 </script>
 
 <style src="./display.css" scoped></style>

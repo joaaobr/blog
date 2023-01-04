@@ -1,21 +1,21 @@
 <template src="./auth.html"></template>
 
 <script>
-import axios from 'axios'
+import axios from "../../../axios.config";
 
 export default {
-  name: 'Auth',
+  name: "Auth",
   data() {
     return {
       name: null,
       email: null,
       password: null,
-      isLogged: false
-    }
+      isLogged: false,
+    };
   },
 
   mounted() {
-    this.validateToken()
+    this.validateToken();
   },
 
   methods: {
@@ -23,48 +23,47 @@ export default {
       const data = {
         email: this.email,
         password: this.password,
-      }
+      };
 
-      await axios.post("http://localhost:3000/auth/", data)
-      .then(data => {
-          window.localStorage.setItem("token", data.data.message)
-          this.redirectToHome()
-      })
-      .catch(err => {
-        if(err.response.status == 404) {
-          alert(err.response.data.message)
-        } else {
-          alert("There was an error") 
-        }
-      })
-      
+      await axios
+        .post(`/auth/`, data)
+        .then((data) => {
+          window.localStorage.setItem("token", data.data.message);
+          this.redirectToHome();
+        })
+        .catch((err) => {
+          if (err.response.status == 404) {
+            alert(err.response.data.message);
+          } else {
+            alert("There was an error");
+          }
+        });
     },
 
     async validateToken() {
-      const token = this.getToken()
+      const token = this.getToken();
 
-      if(!token) return this.isLogged = true
+      if (!token) return (this.isLogged = true);
 
       const headers = {
-        authorization: `Bearer ${token}` 
-      }
-  
-      await axios.post("http://localhost:3000/auth/validate", {}, { headers })
-      .then(data => this.redirectToHome())
-      .catch(err => this.isLogged = true)
+        authorization: `Bearer ${token}`,
+      };
+
+      await axios
+        .post(`/auth/validate`, {}, { headers })
+        .then((data) => this.redirectToHome())
+        .catch((err) => (this.isLogged = true));
     },
-  
+
     getToken() {
-      return window.localStorage.getItem("token")
+      return window.localStorage.getItem("token");
     },
 
     redirectToHome() {
-      window.location.href = '/'
-    }
-  }
-
-
-}
+      window.location.href = "/";
+    },
+  },
+};
 </script>
 
 <style scoped src="./auth.css"></style>

@@ -1,16 +1,16 @@
 <template src="./register.html"></template>
 
 <script>
-import axios from 'axios'
+import axios from "../../../axios.config";
 
 export default {
-  name: 'Auth',
+  name: "Auth",
   data() {
     return {
       name: null,
       email: null,
-      password: null
-    }
+      password: null,
+    };
   },
   methods: {
     async register() {
@@ -18,22 +18,21 @@ export default {
         name: this.name,
         email: this.email,
         password: this.password,
-      }
+      };
 
-      await axios.post("http://localhost:3000/user/create", data)
-      .then(data => alert("Account created successfully"))
-      .catch(err => {
-        if(err.response.status == 404) {
-          window.alert(err.response.data.message)
-        } else {
-          if(err) alert("There was an error") 
-        }
-      })
-      
-    }
-  }
-
-}
+      await axios
+        .post(`/user/create`, data)
+        .then((data) => alert("Account created successfully"))
+        .catch((err) => {
+          if (err.response.status == 404) {
+            window.alert(err.response.data.message);
+          } else {
+            if (err) alert("There was an error");
+          }
+        });
+    },
+  },
+};
 </script>
 
 <style src="./register.css" scoped></style>

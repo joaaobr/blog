@@ -1,114 +1,118 @@
 <template src="./get.html"></template>
 
 <script>
-import axios from 'axios'
+import axios from "../../../axios.config";
 
 export default {
-    name: "Get",
-    data() {
-        return {
-            title: null,
-            message: null,
-            name: null,
-            id: null,
-            nameWidth: 0,
-            titleWidth: 0,
-            comments: [],
-            replyLink: "/auth",
-            postIsMine: false
-        }
+  name: "Get",
+  data() {
+    return {
+      title: null,
+      message: null,
+      name: null,
+      id: null,
+      nameWidth: 0,
+      titleWidth: 0,
+      comments: [],
+      replyLink: "/auth",
+      postIsMine: false,
+    };
+  },
+
+  async mounted() {
+    await this.getPost();
+    await this.getComments();
+    await this.setReplyLink();
+    await this.checkIfThePostIsMine();
+    this.setNameWidth();
+    this.setTitleWidth();
+  },
+
+  methods: {
+    async getPost() {
+      const data = {
+        name: this.$route.params.name,
+        title: this.$route.params.title,
+      };
+
+      await axios.post(`/post/getPost`, data).then((data) => {
+        this.title = data.data.message[0].title;
+        this.message = data.data.message[0].message;
+        this.name = data.data.message[0].name;
+        this.id = data.data.message[0]._id;
+      });
+    },
+    async getComments() {
+      await axios.post(`/comment/find`, { id: this.id }).then((data) => {
+        this.comments = data.data.message;
+      });
     },
 
-    async mounted() {
-        await this.getPost()
-        await this.getComments()
-        await this.setReplyLink()
-        await this.checkIfThePostIsMine()
-        this.setNameWidth()
-        this.setTitleWidth()
+    setNameWidth() {
+      this.nameWidth = this.name.length * 11 + "px";
     },
 
-    methods: {
-        async getPost() {
-            const data = {
-                name: this.$route.params.name,
-                title: this.$route.params.title
-            }
+    setTitleWidth() {
+      this.titleWidth = this.title.length * 11 + "px";
+    },
 
-            await axios.post("http://localhost:3000/post/getPost", data)
-            .then(data => {
-                this.title = data.data.message[0].title
-                this.message = data.data.message[0].message
-                this.name = data.data.message[0].name
-                this.id = data.data.message[0]._id
-            })
+    async verifyToken() {
+      const token = this.getToken();
 
-        },
-        async getComments() {
-            await axios.post("http://localhost:3000/comment/find", { id: this.id })
-            .then(data => {
-                this.comments = data.data.message
-            })
-        },
+      if (!token) return;
 
-        setNameWidth() {
-            this.nameWidth = this.name.length * 11 + 'px'
-        },
+      const headers = {
+        authorization: `Bearer ${token}`,
+      };
 
-        setTitleWidth() {
-            this.titleWidth = this.title.length * 11 + 'px'
-        },
+      await axios
+        .post(`/auth/validate`, {}, { headers })
+        .then(
+          (data) =>
+            (this.isLogged = `/comment/create/${this.name}/${this.title}`)
+        );
+    },
 
-        async verifyToken() {
-            const token = this.getToken()
+    async setReplyLink() {
+      const token = this.getToken();
 
-            if(!token) return
+      if (!token) return;
 
-            const headers = {
-                authorization: `Bearer ${token}` 
-            }
+      const headers = {
+        authorization: `Bearer ${token}`,
+      };
+      await axios
+        .post(`/auth/validate`, {}, { headers })
+        .then(
+          (err) =>
+            (this.replyLink = `/comment/create/${this.name}/${this.title}`)
+        );
+    },
 
-            await axios.post("http://localhost:3000/auth/validate", {}, { headers })
-            .then(data => this.isLogged = `/comment/create/${this.name}/${this.title}`)
-        }, 
-        
-        async setReplyLink() {
-            const token = this.getToken()
+    async deletePost() {
+      await axios
+        .post(`/post/delete/${this.id}`)
+        .then((data) => {
+          this.message = "Successfully deleted post.";
+        })
+        .catch((err) => alert("There was an error"));
+    },
 
-            if(!token) return
+    async checkIfThePostIsMine() {
+      const data = {
+        token: this.getToken(),
+      };
 
-            const headers = {
-                authorization: `Bearer ${token}` 
-            }
-            await axios.post("http://localhost:3000/auth/validate", {}, { headers })
-            .then(err => this.replyLink = `/comment/create/${this.name}/${this.title}`)
-        },    
-        
-        async deletePost() {
-            await axios.post(`http://localhost:3000/post/delete/${this.id}`)
-            .then(data => {
-                this.message = "Successfully deleted post."
-            })
-            .catch(err => alert("There was an error"))
-        },
+      await axios.post(`/user/getUserByToken`, data).then((data) => {
+        if (data.data.message.name === this.name) this.postIsMine = true;
+      });
+    },
 
-        async checkIfThePostIsMine() {
-            const data = {
-                token: this.getToken()
-            }
-    
-            await axios.post("http://localhost:3000/user/getUserByToken", data)
-            .then(data => {
-                if(data.data.message.name === this.name) this.postIsMine = true
-            })
-        },
-
-        getToken() {
-            return window.localStorage.getItem("token")
-        }
-    }
-
-}
+    getToken() {
+      return window.localStorage.getItem("token");
+    },
+  },
+};
 </script>
 
 <style scoped src="./get.css"></style>
