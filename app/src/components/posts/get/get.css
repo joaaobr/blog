@@ -34,8 +34,8 @@ a:hover {
 }
 
 button {
+    width: 85px;
     padding: 3px;
-    width: 12%;
     border: 1px solid rgb(215, 215, 225);
     border-radius: 5px;
     font-weight: bold;
@@ -49,24 +49,26 @@ button:hover {
     transition: 0.5;
 }
 
-#comment {
-    margin-top: 10px;
-}
-
 #container {
     position: absolute;
     top: 10%;
     left: 15%;
     height: 90vh;
-    width: 95vh;
 }
+
+#comment {
+    margin-top: 10px;
+}
+
 
 #title {
     font-size: 35px;
     letter-spacing: 1px;
+    width: 495px;
 }  
 
 #name {
+    width: 495px;
     padding: 1px;
     background-color: rgb(180, 230, 255);
     border: none;

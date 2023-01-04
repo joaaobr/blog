@@ -7,7 +7,6 @@ div {
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    height: 83vh;
 }
 
 button {
@@ -31,8 +30,8 @@ button:hover {
 
 textarea {      
     border: 1px solid rgb(226, 219, 219);
-    width: 68vh;
-    height: 62vh;
+    width: 59vh;
+    height: 61vh;
     font-size: 14px;
     resize: none;
     display: flex;
@@ -44,4 +43,9 @@ textarea {
 textarea:focus {      
     box-shadow: 0 0 0 0;
     outline: 0;
+}
+
+h1 {
+    text-align: center;
+    width: 62vh;
 }

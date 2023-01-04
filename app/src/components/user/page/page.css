@@ -6,8 +6,6 @@ body {
     position: absolute;
     top: 10%;
     left: 15%;
-    height: 90vh;
-    width: 95vh;
 }   
 
 a {
@@ -31,6 +29,7 @@ li {
 
 hr {
     border: 1px solid rgb(236, 235, 235);  
+    width: 40vh;
 }
 
 h1 {
