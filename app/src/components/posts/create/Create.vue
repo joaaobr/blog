@@ -29,8 +29,7 @@ export default {
 
       await axios.post("http://localhost:3000/post/create", data)
       .then(data => alert("Post created successfully"))
-      .catch(err => { 
-        console.log(err)
+      .catch(err => {
         if(err.response.status === 404) {
           return alert(err.response.data.message)
         }
