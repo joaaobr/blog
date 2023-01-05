@@ -16,8 +16,6 @@ module.exports = {
 
             const checkIfTitleOfPostExists = await Post.findOne({ title, name: checkEmail.name })
 
-            console.log(checkIfTitleOfPostExists)
-
             if(checkIfTitleOfPostExists) return res.status(404).json({ message: "You have already created a post with this title." })
 
             const post = await Post.create({
