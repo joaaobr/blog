@@ -12,9 +12,11 @@ module.exports = {
         try {         
             const checkEmail = await User.findOne({ email })
             
-            if(!checkEmail) return res.status(404).json({ message: "email is not valid!" })
+            if(!checkEmail) return res.status(404).json({ message: "Email is not valid!" })
 
-            const checkIfTitleOfPostExists = await Post.find({ title, name: checkEmail.name })
+            const checkIfTitleOfPostExists = await Post.findOne({ title, name: checkEmail.name })
+
+            console.log(checkIfTitleOfPostExists)
 
             if(checkIfTitleOfPostExists) return res.status(404).json({ message: "You have already created a post with this title." })
 

@@ -27,8 +27,7 @@ export default {
         message: this.message,
       };
 
-      await axios
-        .post(`/post/create`, data)
+      await axios.post(`/post/create`, data)
         .then((data) => alert("Post created successfully"))
         .catch((err) => {
           if (err.response.status === 404) {
@@ -42,8 +41,7 @@ export default {
     async getEmail() {
       const token = this.getToken();
 
-      await axios
-        .post(`/user/getUserByToken`, { token })
+      await axios.post(`/user/getUserByToken`, { token })
         .then((data) => (this.email = data.data.message.email))
         .catch((err) => this.redirectToAuth());
     },
@@ -57,8 +55,7 @@ export default {
         authorization: `Bearer ${token}`,
       };
 
-      await axios
-        .post(`/auth/validate`, {}, { headers })
+      await axios.post(`/auth/validate`, {}, { headers })
         .then((err) => (this.isLogged = true))
         .catch((err) => this.redirectToAuth());
     },
