@@ -3,7 +3,7 @@ const PostController = require('./controllers/PostsController')
 const CommentController = require('./controllers/CommentController')
 const AuthController = require('./controllers/AuthController')
 
-module.exports = (app) => {
+module.exports = app => {
     app.post('/user/create', UserController.create)
     
     app.post('/user/delete/:id', UserController.delete)
