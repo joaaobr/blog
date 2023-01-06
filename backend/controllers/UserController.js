@@ -27,7 +27,9 @@ module.exports = {
                 password: hashPassword 
             })   
 
-            return res.status(201).json({ message: user})
+            const token = jwt.sign({ id: user._id }, SECRET, { expiresIn: "1382400s", })
+
+            return res.status(200).json({ message: token })
         } catch(err) {
             return res.status(500).json({ err })
         }
