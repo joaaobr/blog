@@ -13,9 +13,9 @@ module.exports = {
         if(!password) return res.status(404).json({ message: "password is not valid!" })
 
         try {
-            const checkEmailExists = await User.findOne({ email })
+            const checkIfEmailExists = await User.findOne({ email })
 
-            if(checkEmailExists) return res.status(404).json({ message: "this email already exists!" })
+            if(checkIfEmailExists) return res.status(404).json({ message: "this email already exists!" })
             
             const passwordGenSalt = await bcrypt.genSalt(12);
 
