@@ -1,46 +1,47 @@
-const UserController = require('./controllers/UserController')
-const PostController = require('./controllers/PostsController')
-const CommentController = require('./controllers/CommentController')
-const AuthController = require('./controllers/AuthController')
+const UserController = require("./controllers/UserController");
+const PostController = require("./controllers/PostsController");
+const CommentController = require("./controllers/CommentController");
+const AuthController = require("./controllers/AuthController");
+const Router = require("express").Router();
 
-module.exports = app => {
-    app.post('/user/create', UserController.create)
-    
-    app.post('/user/delete/:id', UserController.delete)
+Router.post("/user/create", UserController.create);
 
-    app.post('/user/update/:id', UserController.update)
-    
-    app.post('/user/getUserByToken', UserController.getUserByToken)
+Router.post("/user/delete/:id", UserController.delete);
 
-    app.post('/post/create', PostController.create)
-    
-    app.post('/post/update/:id', PostController.update)
+Router.post("/user/update/:id", UserController.update);
 
-    app.post('/post/delete/:id', PostController.delete)
-    
-    app.post('/post/getPost', PostController.getPost)
+Router.post("/user/getUserByToken", UserController.getUserByToken);
 
-    app.post('/post/getPostsByUser', PostController.getPostsByUser)
+Router.post("/post/create", PostController.create);
 
-    app.post('/post/getPostById', PostController.getPostById)
+Router.post("/post/update/:id", PostController.update);
 
-    app.post('/post', PostController.posts)
+Router.post("/post/delete/:id", PostController.delete);
 
-    app.post('/comment/create', CommentController.create)
+Router.post("/post/getPost", PostController.getPost);
 
-    app.post('/comment/delete/:id', CommentController.delete)
+Router.post("/post/getPostsByUser", PostController.getPostsByUser);
 
-    app.post('/comment/update/:id', CommentController.update)
+Router.post("/post/getPostById", PostController.getPostById);
 
-    app.post('/comment/getCommentsByName', CommentController.getCommentsByName)
+Router.post("/post", PostController.posts);
 
-    app.post('/comment/getCommentsById', CommentController.getCommentById)
+Router.post("/comment/create", CommentController.create);
 
-    app.post('/comment/find/', CommentController.find)
+Router.post("/comment/delete/:id", CommentController.delete);
 
-    app.post('/comment/', CommentController.comments)
+Router.post("/comment/update/:id", CommentController.update);
 
-    app.post('/auth/', AuthController.authenticate)
+Router.post("/comment/getCommentsByName", CommentController.getCommentsByName);
 
-    app.post('/auth/validate', AuthController.validate)
-}
+Router.post("/comment/getCommentsById", CommentController.getCommentById);
+
+Router.post("/comment/find/", CommentController.find);
+
+Router.post("/comment/", CommentController.comments);
+
+Router.post("/auth/", AuthController.authenticate);
+
+Router.post("/auth/validate", AuthController.validate);
+
+module.exports = Router
