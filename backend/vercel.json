@@ -2,6 +2,7 @@
     "name": "blog",
     "version": 2,
     "public": true,
+    "buildCommand": "npm start",
     "build": {
         "src": "./app.js",
         "use": "@vercel/node"
