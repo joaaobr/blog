@@ -2,7 +2,10 @@
     "name": "blog",
     "version": 2,
     "public": true,
-    "build": {},
+    "build": {
+        "src": "./app.js",
+        "use": "@vercel/node"
+    },
     "routes": [
         {
             "src": "/(.*)",
