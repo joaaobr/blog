@@ -44,4 +44,6 @@ Router.post("/auth/", AuthController.authenticate);
 
 Router.post("/auth/validate", AuthController.validate);
 
+Router.get('/', (req, res) => res.json({}))
+
 module.exports = Router

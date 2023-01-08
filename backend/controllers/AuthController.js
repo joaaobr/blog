@@ -7,7 +7,7 @@ const { SECRET } = process.env
 module.exports = {
     async authenticate(req, res) {
         const { email, password } = req.body
-
+        
         if(!email) return res.status(404).json({ message: "email is not valid!" })
         if(!password) return res.status(404).json({ message: "password is not valid!" })
 
@@ -19,7 +19,7 @@ module.exports = {
             const verifyPassword = bcrypt.compare(password, verifyEmail.password)
 
             if(!verifyPassword) return res.status(404).json({ message: "password is not valid!" })
-
+ 
             const token = jwt.sign({ id: verifyEmail._id }, SECRET, { expiresIn: "1382400s", })
 
             return res.status(200).json({ message: token })
