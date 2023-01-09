@@ -17,9 +17,8 @@ export default {
 
   methods: {
     async getPosts() {
-      await axios
-        .post(`/post`)
-        .then((data) => (this.posts = data.data.message));
+      await axios.post('/post')
+      .then(data => (this.posts = data.data.message));
     },
   },
 };
