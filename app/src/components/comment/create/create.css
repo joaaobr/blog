@@ -1,10 +1,12 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 div {
     position: absolute;
-    top: 50%;
+    top: 46%;
     left: 50%;
     transform: translate(-50%,-50%);
 }
@@ -12,14 +14,13 @@ div {
 button {
     background-color: dodgerblue;
     border: none;
-    padding: 15px;
+    height: 5vh;
     width: 85%;
-    border-radius: 10px;
+    border-radius: 20px;
     color: rgb(255, 255, 255);
     font-size: 16px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto
+    margin-left: 10%;
+    margin-top: 10px;
 }
 
 button:hover {
@@ -30,11 +31,10 @@ button:hover {
 
 textarea {      
     border: 1px solid rgb(226, 219, 219);
-    width: 59vh;
-    height: 61vh;
+    width: 46vh;
+    height: 58vh;
     font-size: 14px;
     resize: none;
-    display: flex;
     padding: 17px 20px;
     font-family: 'Courier New', Courier, monospace;
 }
@@ -45,7 +45,30 @@ textarea:focus {
     outline: 0;
 }
 
-h1 {
-    text-align: center;
-    width: 62vh;
+@media(max-width: 1200px) {
+    textarea {
+        width: 45vh;
+        height: 50vh;
+    }
+}
+
+@media(max-width: 900px) {
+    textarea {
+        width: 40vh;
+        height: 45vh;
+    }
+}
+
+@media(max-width: 500px) {
+    textarea {
+        width: 35vh;
+        height: 40vh;
+    }
+}
+
+@media(max-width: 320px) {
+    textarea {
+        width: 30vh;
+        height: 35vh;
+    }
 }

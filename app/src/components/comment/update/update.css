@@ -45,7 +45,30 @@ textarea:focus {
     outline: 0;
 }
 
-h1 {
-    width: 60vh;
-    text-align: center;
+@media(max-width: 1200px) {
+    textarea {
+        width: 45vh;
+        height: 50vh;
+    }
+}
+
+@media(max-width: 900px) {
+    textarea {
+        width: 40vh;
+        height: 45vh;
+    }
+}
+
+@media(max-width: 500px) {
+    textarea {
+        width: 35vh;
+        height: 40vh;
+    }
+}
+
+@media(max-width: 320px) {
+    textarea {
+        width: 30vh;
+        height: 35vh;
+    }
 }

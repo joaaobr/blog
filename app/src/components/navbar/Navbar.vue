@@ -1,4 +1,23 @@
-<template src="./navbar.html"></template>
+<template>
+<body>
+  <header>
+      <nav>
+          <a v-if="fullLoad" class="logo" href="/">Blog</a>
+
+          <ul v-if="isLogged && fullLoad" class="nav-list">
+              <li><a href="/post/create">Create new post</a></li>
+              <li><a :href="`/user/${name}`">{{name}}</a></li>
+              <li><button v-on:click="logout">Logout</button></li>
+          </ul>
+
+          <ul v-if="!isLogged && fullLoad" class="nav-list">
+              <li><a href="/register">Register</a></li>
+              <li><a href="/auth">Auth</a></li>
+          </ul>
+      </nav>
+  </header>
+</body>
+</template>
 
 <script>
 import axios from "../../axios.config";
@@ -10,12 +29,14 @@ export default {
       name: null,
       id: null,
       isLogged: false,
+      fullLoad: false
     };
   },
 
   async mounted() {
     await this.verifyToken();
     await this.getUserData();
+    this.fullLoad = true
   },
 
   methods: {

@@ -2,22 +2,6 @@ body {
     font-family: 'Courier New', Courier, monospace;  
 }
 
-textarea {  
-    position: absolute;    
-    border: 1px solid rgb(226, 219, 219);
-    width: 20vh;
-    height: 20vh;
-    font-size: 14px;
-    resize: none;
-    display: flex;
-    padding: 17px 20px;
-    font-family: 'Courier New', Courier, monospace;
-}
-
-textarea:focus {      
-    box-shadow: 0 0 0 0;
-    outline: 0;
-}
 
 li {
     list-style: none;
@@ -62,13 +46,12 @@ button:hover {
 
 
 #title {
-    font-size: 35px;
+    font-size: 36px;
     letter-spacing: 1px;
-    width: 495px;
+    max-width: 100%;
 }  
 
 #name {
-    width: 495px;
     padding: 1px;
     background-color: rgb(180, 230, 255);
     border: none;
@@ -108,4 +91,8 @@ button:hover {
 #reply:hover {
     background-color: rgb(250, 250, 245);
     transition: 0.5;
+}
+
+#message {
+    font-size: 18px;
 }

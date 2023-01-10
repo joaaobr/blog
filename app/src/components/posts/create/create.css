@@ -1,5 +1,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 div {
@@ -11,23 +13,24 @@ div {
 
 input {
     padding: 16px;
-    width: 58vh;
+    width: 50vh;
     border: none;
     outline: none;
     font-size: 15px;
     border: 1px solid rgb(226, 219, 219);
     border-radius: 2px;
+    margin-top: 5%;
 }
 
 button {
     background-color: dodgerblue;
     border: none;
-    padding: 15px;
-    width: 85%;
-    border-radius: 10px;
+    height: 5vh;
+    width: 80%;
+    border-radius: 18px;
     color: rgb(255, 255, 255);
     font-size: 16px;
-    margin-left: 50px;
+    margin-left: 10%;
 }
 
 button:hover {
@@ -38,11 +41,10 @@ button:hover {
 
 textarea {      
     border: 1px solid rgb(226, 219, 219);
-    width: 57vh;
-    height: 61vh;
+    width: 49vh;
+    height: 54vh;
     font-size: 14px;
     resize: none;
-    display: flex;
     padding: 17px 20px;
     font-family: 'Courier New', Courier, monospace;
 }
@@ -54,6 +56,86 @@ textarea:focus {
 }
 
 h1 {
-    width: 60vh;
-    text-align: center;
+    font-size: 35px;
+    margin-top: 10%;
+    margin-left: 20%;
+}
+
+@media(max-width: 1200px) {
+    textarea {
+        width: 37vh;
+        height: 46vh;
+    }
+
+    input {
+        width: 38vh;
+        margin-top: 8%;
+    }
+}
+
+@media(max-width: 900px) {
+    textarea {
+        width: 31vh;
+        height: 42vh;
+    }
+
+    input {
+        width: 32vh;
+    }
+}
+
+@media(max-width: 500px) {
+    textarea {
+        width: 26vh;
+        height: 37vh;
+    }
+
+    input {
+        width: 27vh;
+    }
+}
+
+@media(max-width: 1200px) {
+    textarea {
+        width: 45vh;
+        height: 50vh;
+    }
+
+    input {
+        width: 46vh;
+        margin-top: 3%;
+    }
+}
+
+@media(max-width: 900px) {
+    textarea {
+        width: 40vh;
+        height: 45vh;
+    }
+
+    input {
+        width: 41vh;
+    }
+}
+
+@media(max-width: 500px) {
+    textarea {
+        width: 35vh;
+        height: 40vh;
+    }
+
+    input {
+        width: 36vh;
+    }
+}
+
+@media(max-width: 320px) {
+    textarea {
+        width: 30vh;
+        height: 35vh;
+    }
+
+    input {
+        width: 31vh;
+    }
 }

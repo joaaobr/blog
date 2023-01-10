@@ -12,8 +12,8 @@ a:hover {
 }
 
 button {
+    width: 85px;
     padding: 3px;
-    width: 12%;
     border: 1px solid rgb(215, 215, 225);
     border-radius: 5px;
     font-weight: bold;
@@ -49,6 +49,7 @@ button:hover {
 #title {
     font-size: 23px;
     font-family:'Courier New', Courier, monospace;
+    max-width: 100%;
 }
 
 #linkPost {

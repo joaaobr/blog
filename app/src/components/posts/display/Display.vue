@@ -1,4 +1,10 @@
-<template src="./display.html"></template>
+<template>
+<body>
+  <div>
+      <a v-for="post in posts" :key="post" :href="`/post/${post.name}/${post.title}`">{{post.title}}<br></a>
+  </div>
+</body>
+</template>
 
 <script>
 import axios from "../../../axios.config";
