@@ -2,6 +2,7 @@
 
 <script>
 import axios from "../../../axios.config";
+import LoadingPage from "@/components/loading-page/LoadingPage.vue";
 
 export default {
   name: "Page",
@@ -10,11 +11,17 @@ export default {
       name: this.$route.params.name,
       posts: false,
       comments: false,
+      fullLoad: false
     };
   },
 
+  components: {
+    LoadingPage
+  },
+
   async mounted() {
-    await this.getAllUserData();
+    await this.getAllUserData()
+    setTimeout(() => this.fullLoad = true, 680)
   },
 
   methods: {

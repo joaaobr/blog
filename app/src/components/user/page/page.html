@@ -1,5 +1,7 @@
 <body>
-    <div id="container">
+    <LoadingPage v-if="!fullLoad"></LoadingPage>
+
+    <div v-if="fullLoad" id="container">
         <h1 v-if="posts && comments">{{ name }}</h1>
         <br>
         <hr v-if="posts && comments">
