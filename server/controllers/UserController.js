@@ -1,5 +1,7 @@
 require('dotenv').config()
 const User = require('../models/User')
+const Comments = require('../models/Comments')
+const Posts = require('../models/Posts')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { SECRET } = process.env
@@ -94,8 +96,27 @@ module.exports = {
 
         return res.status(200).json({ message: checkIdExists })
     })
+   },
 
+   async getAllUserDataByName(req, res) {
+    const { name } = req.body
 
-
+    if(!name) return res.status(404).json({ message: "name is not valid!" })
+    
+    try {
+        const checkIfNameIsValid = await User.find({ name })
+    
+        if(!checkIfNameIsValid) return res.status(404).json({ message: "name is not valid!" })
+    
+        const comments = await Comments.find({ name })
+        const posts = await Posts.find({ name })
+    
+        return res.status(200).json({ 
+            comments,
+            posts
+        })
+    } catch (err) {
+        return res.status(500).json(err)
+    }
    }
 }

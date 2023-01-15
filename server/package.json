@@ -2,10 +2,10 @@
   "name": "blog",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "api/index.js",
   "scripts": {
-    "start": "NODE_ENV=production node app.js",
-    "development": "nodemon app.js"
+    "start": "NODE_ENV=production node api/index.js",
+    "development": "nodemon ./api/index.js"
   },
   "keywords": [],
   "author": "",

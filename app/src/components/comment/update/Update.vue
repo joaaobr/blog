@@ -1,4 +1,12 @@
-<template src="./update.html"></template>
+<template>
+  <body>
+    <div v-if="isLogged">
+        <textarea v-model="message" rows="10"></textarea>
+        <br>
+        <button v-on:click="update">Update</button>
+    </div>
+</body>
+</template>
 
 <script>
 import axios from "../../../axios.config";
@@ -25,9 +33,8 @@ export default {
         id: this.id,
       };
 
-      await axios
-        .post(`/comment/getCommentsById`, data)
-        .then((data) => {
+      await axios.post('/comment/getCommentsById', data)
+        .then(data => {
           this.id = data.data.message._id;
           this.name = data.data.message.name;
           this.message = data.data.message.message;
@@ -40,13 +47,11 @@ export default {
 
       if (!token) this.redirectToAuth();
 
-      await axios
-        .post(`/user/getUserByToken`, { token })
-        .then((data) => {
+      await axios.post('/user/getUserByToken', { token })
+        .then(data => {
           if (data.data.message.name === this.name) {
-            return (this.isLogged = true);
+            return this.isLogged = true;
           }
-
           this.redirectToHome();
         })
         .catch((err) => this.redirectToAuth());
@@ -61,13 +66,9 @@ export default {
         message: this.message,
       };
 
-      await axios
-        .post(`/comment/update/${this.id}`, data)
-        .then((data) => {
-          alert("Comment successfully updated");
-          this.redirectToHome();
-        })
-        .catch((err) => alert("There was an error"));
+      await axios.post(`/comment/update/${this.id}`, data)
+        .then(data => this.redirectToHome())
+        .catch(err => alert("There was an error"))
     },
 
     redirectToAuth() {

@@ -1,4 +1,5 @@
 const Post = require('../models/Posts')
+const Comment = require('../models/Comments')
 const User = require('../models/User')
 
 module.exports = {
@@ -97,7 +98,6 @@ module.exports = {
         if(!name) return res.status(404).json({ message: "name is not valid!" })
 
         try {
-
             const checkPost = await Post.find({ name })
 
             if(!checkPost) return res.status(404).json({ message: "name is not valid!" })
@@ -124,6 +124,27 @@ module.exports = {
         } catch(err) {
             return res.status(500).json({ err })
         }
+    },
 
+    async getAllPostData(req, res) {
+        const { name, title } = req.body
+
+        if(!name) return res.status(404).json({ message: "name is not valid!" })
+        if(!title) return res.status(404).json({ message: "title is not valid!" })
+
+        try {
+            const checkIfIdIsValid = await Post.findOne({ name, title })
+
+            if(!checkIfIdIsValid) return res.status(404).json({ message: "name or title is not valid!" })
+
+            const comments = await Comment.find({ post_id: checkIfIdIsValid._id })
+            
+            return res.status(200).json({ 
+                post: checkIfIdIsValid,
+                comments
+            })
+        } catch(err) {
+            return res.status(500).json({ err })
+        }
     }
 }

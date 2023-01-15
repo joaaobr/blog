@@ -1,5 +1,7 @@
 <body>
-    <div id="container">
+    <LoadingPage v-if="!fullLoad"></LoadingPage>
+
+    <div v-if="fullLoad" id="container">
         <p id="name" :style="{width: nameWidth}">
             <a :href="`/user/${this.name}`"> {{ name }} </a>
         </p>

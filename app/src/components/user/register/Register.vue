@@ -12,6 +12,7 @@ export default {
       password: null,
     };
   },
+
   methods: {
     async register() {
       const data = {
@@ -20,7 +21,7 @@ export default {
         password: this.password,
       };
 
-      await axios.post(`/user/create`, data)
+      await axios.post('/user/create', data)
         .then(data => {
           window.localStorage.setItem("token", data.data.message)
           window.location.href = '/'
@@ -29,7 +30,7 @@ export default {
           if (err.response.status == 404) {
             window.alert(err.response.data.message);
           } else {
-            if (err) alert("There was an error");
+            alert("There was an error");
           }
         });
     },

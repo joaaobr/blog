@@ -8,41 +8,27 @@ export default {
   data() {
     return {
       name: this.$route.params.name,
-      posts: [],
-      comments: [],
+      posts: false,
+      comments: false,
     };
   },
 
   async mounted() {
-    await this.getPosts();
-    await this.getComments();
+    await this.getAllUserData();
   },
 
   methods: {
-    async getPosts() {
+    async getAllUserData() {
       const data = {
         name: this.name,
       };
 
-      await axios
-        .post(`/post/getPostsByUser`, data)
-        .then((data) => (this.posts = data.data.message))
-        .catch((err) => this.redirectToHome());
-    },
-
-    async getComments() {
-      const data = {
-        name: this.name,
-      };
-
-      await axios
-        .post(`/comment/getCommentsByName`, data)
-        .then((data) => (this.comments = data.data.message))
-        .catch((err) => this.redirectToHome());
-    },
-
-    redirectToHome() {
-      window.location.href = "/";
+      axios.post('user/getAllUserDataByName', data)
+      .then(data => {
+        this.posts = data.data.posts
+        this.comments = data.data.comments
+      })
+      .catch(err => window.location.href = "/")
     },
   },
 };

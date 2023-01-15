@@ -19,7 +19,7 @@ module.exports = {
             const verifyPassword = bcrypt.compare(password, verifyEmail.password)
 
             if(!verifyPassword) return res.status(404).json({ message: "password is not valid!" })
- 
+            
             const token = jwt.sign({ id: verifyEmail._id }, SECRET, { expiresIn: "1382400s", })
 
             return res.status(200).json({ message: token })

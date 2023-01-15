@@ -2,9 +2,15 @@
 
 <script>
 import axios from "../../../axios.config";
+import Navbar from "@/components/navbar/Navbar.vue";
+import LoadingPage from "@/components/loading-page/LoadingPage.vue";
 
 export default {
   name: "Get",
+  components: {
+    LoadingPage,
+    Navbar
+  },
   data() {
     return {
       nameWidth: this.$route.params.name.length * 11 + "px",
@@ -13,56 +19,38 @@ export default {
       name: null,
       id: null,
       comments: [],
-      replyLink: '/',
+      replyLink: '/auth',
       postIsMine: false,
+      fullLoad: false
     };
   },
 
   async mounted() {
-    await this.getPost();
+    await this.getAllPostData()
     await this.checkIfThePostIsMine();
-    await this.getComments();
-  },
-  
-  created() {
     this.setReplyLink()
+    setTimeout(() => this.fullLoad = true, 400)
   },
 
   methods: {
-    async getPost() {
+    async getAllPostData() {
       const data = {
         name: this.$route.params.name,
         title: this.$route.params.title,
       };
 
-      await axios.post('/post/getPost', data)
+      await axios.post('/post/getAllPostData', data)
       .then(data => {
-        this.title = data.data.message[0].title;
-        this.message = data.data.message[0].message;
-        this.name = data.data.message[0].name;
-        this.id = data.data.message[0]._id;
-      });
-    },
-
-    async getComments() {
-      await axios.post('/comment/find', { id: this.id }).then(data => this.comments = data.data.message);
+        this.title = data.data.post.title
+        this.message = data.data.post.message
+        this.name = data.data.post.name
+        this.id = data.data.post._id
+        this.comments = data.data.comments
+      })
     },
 
     setReplyLink() {
       this.replyLink = `/comment/create/${this.name}/${this.title}`
-    },
-
-    async verifyToken() {
-      const token = this.getToken();
-
-      if (!token) return;
-
-      const headers = {
-        authorization: `Bearer ${token}`,
-      };
-
-      await axios.post('/auth/validate', {}, { headers })
-        .then(data =>(this.isLogged = `/comment/create/${this.name}/${this.title}`));
     },
 
     async deletePost() {
@@ -72,16 +60,9 @@ export default {
     },
 
     async checkIfThePostIsMine() {
-      const data = {
-        token: this.getToken(),
-      };
-
-      await axios.post('/user/getUserByToken', data).then((data) => this.postIsMine = data.data.message.name === this.name ? true : false)
-    },
-
-    getToken() {
-      return window.localStorage.getItem("token");
-    },
+      const name = window.localStorage.getItem('__')
+      this.postIsMine = name === this.name ? true : false
+    }
   },
 };
 </script>

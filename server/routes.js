@@ -12,6 +12,8 @@ Router.post("/user/update/:id", UserController.update);
 
 Router.post("/user/getUserByToken", UserController.getUserByToken);
 
+Router.post("/user/getAllUserDataByName", UserController.getAllUserDataByName);
+
 Router.post("/post/create", PostController.create);
 
 Router.post("/post/update/:id", PostController.update);
@@ -24,6 +26,8 @@ Router.post("/post/getPostsByUser", PostController.getPostsByUser);
 
 Router.post("/post/getPostById", PostController.getPostById);
 
+Router.post("/post/getAllPostData", PostController.getAllPostData);
+
 Router.post("/post", PostController.posts);
 
 Router.post("/comment/create", CommentController.create);
@@ -35,6 +39,8 @@ Router.post("/comment/update/:id", CommentController.update);
 Router.post("/comment/getCommentsByName", CommentController.getCommentsByName);
 
 Router.post("/comment/getCommentsById", CommentController.getCommentById);
+
+Router.post("/comment/getAllCommentData", CommentController.getAllCommentData);
 
 Router.post("/comment/find/", CommentController.find);
 

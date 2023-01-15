@@ -47,7 +47,7 @@ const routes = [
     component: UserPage
   },
   {
-    path: '/comment/:name/:index',
+    path: '/comment/:id',
     name: 'ViewComment',
     component: ViewComment
   },

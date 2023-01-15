@@ -127,5 +127,26 @@ module.exports = {
             return res.status(500).json({ err })
         }
 
+    },
+
+    async getAllCommentData(req, res) {
+        const { id } = req.body
+
+        if(!id) return res.status(404).json({ message: "id is not valid!" })
+
+        try {
+            const checkIfIdIsValid = await Comment.findById(id)
+
+            if(!checkIfIdIsValid) return res.status(404).json({ message: "id is not valid!" })
+
+            const post = await Post.findById(checkIfIdIsValid.post_id.toString())
+
+            return res.status(200).json({ 
+                comment: checkIfIdIsValid,
+                post
+            })
+        } catch(err) {
+            return res.status(500).json({ err })
+        }
     }
 }

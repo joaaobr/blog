@@ -14,8 +14,8 @@ export default {
     };
   },
 
-  mounted() {
-    this.validateToken();
+  async mounted() {
+    await this.validateToken();
   },
 
   methods: {
@@ -25,13 +25,12 @@ export default {
         password: this.password,
       };
 
-      await axios
-        .post(`/auth/`, data)
-        .then((data) => {
+      await axios.post('/auth/', data)
+        .then(data => {
           window.localStorage.setItem("token", data.data.message);
           this.redirectToHome();
         })
-        .catch((err) => {
+        .catch(err => {
           if (err.response.status == 404) {
             alert(err.response.data.message);
           } else {
@@ -41,7 +40,7 @@ export default {
     },
 
     async validateToken() {
-      const token = this.getToken();
+      const token = window.localStorage.getItem("token");
 
       if (!token) return (this.isLogged = true);
 
@@ -49,14 +48,9 @@ export default {
         authorization: `Bearer ${token}`,
       };
 
-      await axios
-        .post(`/auth/validate`, {}, { headers })
-        .then((data) => this.redirectToHome())
-        .catch((err) => (this.isLogged = true));
-    },
-
-    getToken() {
-      return window.localStorage.getItem("token");
+      await axios.post('/auth/validate', {}, { headers })
+        .then(data => this.redirectToHome())
+        .catch(err => this.isLogged = true)
     },
 
     redirectToHome() {
