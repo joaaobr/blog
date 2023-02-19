@@ -10,7 +10,7 @@ export default {
       title: null,
       message: null,
       email: null,
-      isLogged: false,
+      isLogged: false
     };
   },
 
@@ -28,7 +28,7 @@ export default {
       };
 
       await axios.post(`/post/create`, data)
-        .then((data) => alert("Post created successfully"))
+        .then((data) => window.location.href = `/post/${data.data.message.name}/${this.title}`)
         .catch((err) => {
           if (err.response.status === 404) {
             return alert(err.response.data.message);
