@@ -35,11 +35,10 @@ export default {
   methods: {
     async getAllPostData() {
       const data = {
-        name: this.$route.params.name,
-        title: this.$route.params.title,
+        id: this.$route.params.id,
       };
 
-      await axios.post('/post/getAllPostData', data)
+      await axios.post('/post/getPostAndCommentsById', data)
       .then(data => {
         this.title = data.data.post.title
         this.message = data.data.post.message

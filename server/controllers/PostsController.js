@@ -126,14 +126,13 @@ module.exports = {
         }
     },
 
-    async getAllPostData(req, res) {
-        const { name, title } = req.body
+    async getPostAndCommentsById(req, res) {
+        const { id } = req.body
 
-        if(!name) return res.status(404).json({ message: "name is not valid!" })
-        if(!title) return res.status(404).json({ message: "title is not valid!" })
+        if(!id) return res.status(404).json({ message: "id is not valid!" })
 
         try {
-            const checkIfIdIsValid = await Post.findOne({ name, title })
+            const checkIfIdIsValid = await Post.findById(id)
 
             if(!checkIfIdIsValid) return res.status(404).json({ message: "name or title is not valid!" })
 

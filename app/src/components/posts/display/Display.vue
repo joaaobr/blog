@@ -1,7 +1,7 @@
 <template>
 <body>
   <div>
-      <a v-for="post in posts" :key="post" :href="`/post/${post.name}/${post.title}`">{{post.title}}<br></a>
+      <a v-for="post in posts" :key="post" :href="`/post/${post.name}/${post._id}`">{{post.title}}<br></a>
   </div>
 </body>
 </template>

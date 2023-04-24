@@ -26,7 +26,7 @@ Router.post("/post/getPostsByUser", PostController.getPostsByUser);
 
 Router.post("/post/getPostById", PostController.getPostById);
 
-Router.post("/post/getAllPostData", PostController.getAllPostData);
+Router.post("/post/getPostAndCommentsById", PostController.getPostAndCommentsById);
 
 Router.post("/post", PostController.posts);
 

@@ -32,7 +32,7 @@ const routes = [
     component: CreatePost
   },
   {
-    path: '/post/:name/:title',
+    path: '/post/:name/:id',
     name: 'post',
     component: Post
   },
