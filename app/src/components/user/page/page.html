@@ -9,7 +9,7 @@
         <h2 v-if="posts">Posts</h2>
         <li v-for="(post, index) in posts" :key="post">
             <br>
-            <a :href="`/post/${post.name}/${post.title}`">{{index+1}}.{{post.title}}</a>
+            <a :href="`/post/${post.name}/${post._id}`">{{index+1}}.{{post.title}}</a>
         </li> 
         <br>
         <h2 v-if="comments">Comments</h2>
