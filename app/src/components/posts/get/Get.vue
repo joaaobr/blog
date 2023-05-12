@@ -58,8 +58,12 @@ export default {
         .catch(err => alert("There was an error"));
     },
 
+    getUserName() {
+      return JSON.parse(window.localStorage.getItem('__user_data__')).name
+    },
+
     async checkIfThePostIsMine() {
-      const name = window.localStorage.getItem('__')
+      const name = this.getUserName()
       this.postIsMine = name === this.name ? true : false
     }
   },

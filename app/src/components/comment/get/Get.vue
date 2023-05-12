@@ -59,7 +59,7 @@ export default {
 
     async checkIfTheCommentIsMine() {
         const token = window.localStorage.getItem('token')
-        const name = window.localStorage.getItem('__')
+        const name = window.localStorage.getItem('__user_data__').name
 
         return this.commentIsMine = name === this.nameUserOfComment && token ? true : false
     },

@@ -33,7 +33,7 @@ module.exports = {
 
             return res.status(200).json({ message: token })
         } catch(err) {
-            return res.status(500).json({ err })
+            return res.status(500).json({ err: "there was an error!" })
         }
     },
 
@@ -56,7 +56,7 @@ module.exports = {
             return res.status(200).json({ message: UserToBeRemoved })
 
         } catch(err) {
-            return res.status(500).json(err)
+            return res.status(500).json({ err: "there was an error!" })
         }
     },
 
@@ -65,7 +65,6 @@ module.exports = {
         const { password } = req.body
 
         try {
-
             const user = await User.findById(id)
 
             if(!user) return res.status(404).json({ message: "Id is not valid!" })
@@ -79,7 +78,7 @@ module.exports = {
             return res.status(200).json({ message: UserToBeUpdate })
 
         } catch(err) {
-            return res.status(500).json(err)
+            return res.status(500).json({ err: "there was an error!" })
         }
     },
 
@@ -116,7 +115,17 @@ module.exports = {
             posts
         })
     } catch (err) {
-        return res.status(500).json(err)
+        return res.status(500).json({ err: "there was an error!" })
+    }
+   },
+
+   async getAllUsers(req, res) {   
+    try {
+        const users = await User.find()
+
+        return res.status(200).json({ message: users })
+    } catch (err) {
+        return res.status(500).json({ err: "there was an error!" })
     }
    }
 }

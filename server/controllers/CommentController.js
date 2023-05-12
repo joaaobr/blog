@@ -11,9 +11,9 @@ module.exports = {
         if(!message) return res.status(404).json({ message: "message is not valid!" })
 
         try {
-            const verifyNameUser = await User.findOne({ name })
+            const verifyUserName = await User.findOne({ name })
 
-            if(!verifyNameUser) return res.status(404).json({ message: "name is not valid!" })
+            if(!verifyUserName) return res.status(404).json({ message: "name is not valid!" })
 
             const verifyPostId = await Post.findById(post_id)
 
@@ -27,7 +27,7 @@ module.exports = {
 
             return res.status(201).json({ message: comment })
         } catch(err) {
-            return res.status(500).json(err)
+            return res.status(500).json({ err: "there was an error!" })
         }
     },
 
@@ -45,7 +45,7 @@ module.exports = {
 
             return res.status(200).json({ message: comments })
         } catch(err) {
-            return res.status(500).json(err)
+            return res.status(500).json({ err: "there was an error!" })
         }
 
     },
@@ -62,9 +62,8 @@ module.exports = {
             const comment = await Comment.findByIdAndDelete(id)
 
             return res.status(200).json({ message: comment })
-
         } catch(err) {
-            return res.status(500).json(err)
+            return res.status(500).json({ err: "there was an error!" })
         }
     },
 
@@ -72,16 +71,16 @@ module.exports = {
         const { id } = req.params
 
         try {
-            const verifyid = await Comment.findById(id)
+            const verifyId = await Comment.findById(id)
 
-            if(!verifyid) return res.status(404).json({ message: "Id is not valid!" })
+            if(!verifyId) return res.status(404).json({ message: "Id is not valid!" })
 
             const comment = await Comment.findByIdAndUpdate(id, req.body, { now: true })
 
             return res.status(200).json({ message: comment })
 
         } catch(err) {
-            return res.status(500).json(err)
+            return res.status(500).json({ err: "there was an error!" })
         }
     },
 
@@ -91,7 +90,7 @@ module.exports = {
 
             return res.status(200).json({ message: comments })
         } catch(err) {
-            return res.status(500).json({ error: err.message })
+            return res.status(500).json({ err: "there was an error!" })
         }
     },
 
@@ -107,7 +106,7 @@ module.exports = {
 
             return res.status(200).json({ message: checkName })
         } catch(err) {
-            return res.status(500).json({ err })
+            return res.status(500).json({ err: "there was an error!" })
         }
 
     },
@@ -124,7 +123,7 @@ module.exports = {
 
             return res.status(200).json({ message: checkId })
         } catch(err) {
-            return res.status(500).json({ err })
+            return res.status(500).json({ err: "there was an error!" })
         }
 
     },
@@ -146,7 +145,7 @@ module.exports = {
                 post
             })
         } catch(err) {
-            return res.status(500).json({ err })
+            return res.status(500).json({ err: "there was an error!" })
         }
     }
 }

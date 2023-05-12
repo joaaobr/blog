@@ -2,6 +2,8 @@ require('dotenv').config()
 const express = require("express");
 const cors = require("cors");
 const routes = require("../routes");
+const mongo = require("../database/connection")
+const redis = require("../database/redis")
 const app = express();
 const PORT = process.env.PORT || 3000
 
@@ -22,4 +24,16 @@ app.use((req, res, next) =>  {
 
 app.use(routes)
 
-app.listen(PORT);
+const server = app.listen(PORT)
+
+process.on('SIGINT', async () => {
+  try {
+    server.close()
+    await mongo.connection.close()
+    await redis.quit()
+
+    process.exit(0)
+  } catch (err) {
+    process.exit(1)
+  }
+});

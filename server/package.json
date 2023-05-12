@@ -4,19 +4,23 @@
   "description": "",
   "main": "api/index.js",
   "scripts": {
-    "start": "NODE_ENV=production node api/index.js",
-    "development": "nodemon ./api/index.js"
+    "start:dev": "NODE_ENV=production node api/index.js",
+    "development": "nodemon ./api/index.js",
+    "start": "pm2 start pm2.config.js --attach --update-env -f"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vercel/node": "^2.14.0",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.8.0",
+    "pm2": "^5.3.0",
+    "redis": "^4.6.6",
     "vercel": "^28.10.3"
   },
   "devDependencies": {

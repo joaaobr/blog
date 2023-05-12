@@ -1,6 +1,9 @@
+require('dotenv').config()
 const Post = require('../models/Posts')
 const Comment = require('../models/Comments')
 const User = require('../models/User')
+const redis = require('../database/redis')
+
 
 module.exports = {
     async create(req, res) {
@@ -11,43 +14,51 @@ module.exports = {
         if(!title) return res.status(404).json({ message: "Title is not valid!" })
         
         try {         
-            const checkEmail = await User.findOne({ email })
+            const verifyIfEmailExists = await User.findOne({ email })
             
-            if(!checkEmail) return res.status(404).json({ message: "Email is not valid!" })
+            if(!verifyIfEmailExists) return res.status(404).json({ message: "Email is not valid!" })
 
-            const checkIfTitleOfPostExists = await Post.findOne({ title, name: checkEmail.name })
+            const checkIfTitleOfPostExists = await Post.findOne({ title, name: verifyIfEmailExists.name })
 
             if(checkIfTitleOfPostExists) return res.status(404).json({ message: "You have already created a post with this title." })
 
             const post = await Post.create({
-                name: checkEmail.name,
+                name: verifyIfEmailExists.name,
                 title,
                 message
             })
             
-            return res.status(201).json({ message: post })
+            const cacheKey = "posts"
 
+            const posts = await Post.find()
+            .limit(30)
+            .exec()
+
+            await redis.set(cacheKey, JSON.stringify(posts), {
+                EX: Number(process.env.CACHE_LIFE_TIME),
+            })
+
+            return res.status(201).json({ message: post })
         } catch(err) {
-            return res.status(500).json({ message: err })
+            return res.status(500).json({ err: "there was an error!" })
         }
     },
 
     async update(req, res) {
-        const { id } = req.params
+        const { id, email } = req.params
 
-        if(req.body.email) return res.status(404).json({ message: "It is not valid to send email!" })
+        if(email) return res.status(404).json({ message: "It is not valid to send email!" })
 
         try {
             const post = await Post.findById(id)
 
             if(!post) return res.status(404).json({ message: "Id is not valid!" })
 
-            const PostToBeUpdate = await Post.findByIdAndUpdate(id, req.body, { now: true })
+            const postToBeUpdate = await Post.findByIdAndUpdate(id, req.body, { now: true })
 
-            return res.status(200).json({ message: PostToBeUpdate })
-
+            return res.status(200).json({ message: postToBeUpdate })
         } catch(err) {
-            return res.status(500).json(err)
+            return res.status(500).json({ err: "there was an error!" })
         }
     },
 
@@ -62,19 +73,35 @@ module.exports = {
             const post = await Post.findByIdAndDelete(id)
 
             return res.status(200).json({ message: post })
-
         } catch(err) {
-            return res.status(500).json(err)
+            return res.status(500).json({ err: "there was an error!" })
         }
     },
 
     async posts(req, res) {
         try {
+            const cacheKey = "posts"
+
+            const cachedPosts = await redis.get(cacheKey)
+
+            if(cachedPosts) {
+                return res
+                .status(200)
+                .json({ message: JSON.parse(cachedPosts) })
+            }
+
             const posts = await Post.find()
+            .limit(30)
+            .exec()
+
+            
+            await redis.set(cacheKey, JSON.stringify(posts), {
+                EX: Number(process.env.CACHE_LIFE_TIME),
+            })
 
             return res.status(200).json({ message: posts })
         } catch(err) {
-            return res.status(500).json({ error: err.message })
+            return res.status(500).json({ err: "there was an error!" })
         }
     },
 
@@ -88,7 +115,7 @@ module.exports = {
             
             return res.status(200).json({ message: checkPost })
         } catch(err) {
-            return res.status(500).json({ err })
+            return res.status(500).json({ err: "there was an error!" })
         }
     },
 
@@ -104,7 +131,7 @@ module.exports = {
 
             return res.status(200).json({ message: checkPost })
         } catch(err) {
-            return res.status(500).json({ err })
+            return res.status(500).json({ err: "there was an error!" })
         }
 
 
@@ -122,7 +149,7 @@ module.exports = {
 
             return res.status(200).json({ message: checkId })
         } catch(err) {
-            return res.status(500).json({ err })
+            return res.status(500).json({ err: "there was an error!" })
         }
     },
 
@@ -143,7 +170,7 @@ module.exports = {
                 comments
             })
         } catch(err) {
-            return res.status(500).json({ err })
+            return res.status(500).json({ err: "there was an error!" })
         }
     }
 }

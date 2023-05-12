@@ -21,7 +21,7 @@ export default {
 
   async mounted() {
     await this.getAllUserData()
-    setTimeout(() => this.fullLoad = true, 680)
+    setTimeout(() => this.fullLoad = true, 500)
   },
 
   methods: {

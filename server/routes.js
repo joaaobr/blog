@@ -1,3 +1,4 @@
+require("dotenv").config()
 const UserController = require("./controllers/UserController");
 const PostController = require("./controllers/PostsController");
 const CommentController = require("./controllers/CommentController");
@@ -11,6 +12,8 @@ Router.post("/user/delete/:id", UserController.delete);
 Router.post("/user/update/:id", UserController.update);
 
 Router.post("/user/getUserByToken", UserController.getUserByToken);
+
+Router.post("/user/allUsers", UserController.getAllUsers);
 
 Router.post("/user/getAllUserDataByName", UserController.getAllUserDataByName);
 
@@ -50,6 +53,6 @@ Router.post("/auth/", AuthController.authenticate);
 
 Router.post("/auth/validate", AuthController.validate);
 
-Router.get('/', (req, res) => res.json({}))
+Router.get('/', (req, res) => res.json({ }))
 
 module.exports = Router
