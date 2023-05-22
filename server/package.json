@@ -5,7 +5,7 @@
   "main": "api/index.js",
   "scripts": {
     "start:dev": "NODE_ENV=production node api/index.js",
-    "development": "nodemon ./api/index.js",
+    "dev": "nodemon ./api/index.js",
     "start": "pm2 start pm2.config.js --attach --update-env -f"
   },
   "keywords": [],
@@ -24,7 +24,6 @@
     "vercel": "^28.10.3"
   },
   "devDependencies": {
-    "jest": "^29.3.1",
     "nodemon": "^2.0.20",
     "supertest": "^6.3.3"
   }

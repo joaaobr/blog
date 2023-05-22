@@ -26,14 +26,20 @@ app.use(routes)
 
 const server = app.listen(PORT)
 
-process.on('SIGINT', async () => {
-  try {
-    server.close()
-    await mongo.connection.close()
-    await redis.quit()
-
-    process.exit(0)
-  } catch (err) {
-    process.exit(1)
+function gracefulShutdown() {
+  return async () => {
+    try {
+      server.close(async () => {
+        await mongo.connection.close()
+        await redis.quit()
+    
+        process.exit(0)
+      })
+    } catch (err) {
+      process.exit(1)
+    }
   }
-});
+}
+
+process.on('SIGINT', gracefulShutdown());
+process.on('SIGTERM', gracefulShutdown());
